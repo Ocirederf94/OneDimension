@@ -18,4 +18,8 @@ public class MainActivity extends Activity {
         intent.setAction(Intent.ACTION_VIEW);
         this.startActivity(intent);
     }
+
+    public void handleExitButton(View view) {
+        finish();
+    }
 }

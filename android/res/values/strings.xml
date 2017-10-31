@@ -2,5 +2,7 @@
 <resources>
 
     <string name="app_name">OneDimensionGame</string>
+    <string name="start">Start</string>
+    <string name="exit">Exit</string>
 
 </resources>

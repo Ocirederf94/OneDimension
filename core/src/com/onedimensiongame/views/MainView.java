@@ -19,6 +19,7 @@ public class MainView {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         guessObject.renderGuessObject();
+        guessObject.moveGuessObject();
     }
 
     public void disposeMainView() {

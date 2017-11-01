@@ -1,9 +1,9 @@
 package com.onedimensiongame;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.onedimensiongame.views.MainView;
 
-public class OneDimensionGameMain extends ApplicationAdapter {
+public class OneDimensionGameMain extends Game {
 	private MainView mainView;
 	
 	@Override

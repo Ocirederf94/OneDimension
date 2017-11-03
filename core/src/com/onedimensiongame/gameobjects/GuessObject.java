@@ -20,6 +20,8 @@ public class GuessObject {
     private SpriteBatch spriteBatch;
     private Sprite sprite;
     private float positionX, positionY;
+
+
     public GuessObject(){
         texture = new Texture(LETTER_A);
         sprite = new Sprite(texture);
@@ -27,6 +29,7 @@ public class GuessObject {
         sprite.setColor(Color.BLUE);
         spriteBatch = new SpriteBatch();
         sprite.setPosition((positionX = setInitialX()), (positionY = setInitialY()));
+
 
     }
 

@@ -1,10 +1,8 @@
 package com.onedimensiongame.views;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.onedimensiongame.gameobjects.CoverBlock;
 import com.onedimensiongame.gameobjects.GuessObject;
 import com.onedimensiongame.utils.GameConstants;
@@ -21,8 +19,7 @@ public class MainView {
 
     public MainView() {
         guessObject = new GuessObject();
-        topBlock = new CoverBlock(0,  (Gdx.graphics.getHeight()/ 2)+ GameConstants.GAP_SIZE);
-
+        topBlock = new CoverBlock(0,  (Gdx.graphics.getHeight()/ 2)+ (GameConstants.GAP_SIZE / 2));
         bottomBlock = new CoverBlock(0,0);
     }
 
@@ -31,13 +28,15 @@ public class MainView {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         guessObject.renderGuessObject();
-        guessObject.moveGuessObject();
+        guessObject.showKeyBoard();
         topBlock.drawCoverBlock();
         bottomBlock.drawCoverBlock();
     }
 
     public void disposeMainView() {
         guessObject.disposeGuessObject();
+        topBlock.disposeCoverBlock();
+        bottomBlock.disposeCoverBlock();
     }
 
 }

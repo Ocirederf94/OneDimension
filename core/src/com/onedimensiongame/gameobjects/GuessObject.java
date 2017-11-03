@@ -35,21 +35,35 @@ public class GuessObject {
 
     public void renderGuessObject(){
         startGuessObject();
+        moveGuessObject();
     }
 
-    public void disposeGuessObject(){
-        texture.dispose();
-        spriteBatch.dispose();
+    public void showKeyBoard(){
+        if (sprite.getY() < Gdx.graphics.getHeight() / 4 ){
+            Gdx.input.setOnscreenKeyboardVisible(true);
+        }
+        else {
+            Gdx.input.setOnscreenKeyboardVisible(false);
+        }
     }
 
-    public void moveGuessObject(){
-        sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
+    private void resetGuessObjectPosition(){
+        sprite.setPosition(setInitialX(), setInitialY());
     }
 
     private void startGuessObject(){
         spriteBatch.begin();
         sprite.draw(spriteBatch);
         spriteBatch.end();
+    }
+
+    private void moveGuessObject(){
+        sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
+    }
+
+    public void disposeGuessObject(){
+        texture.dispose();
+        spriteBatch.dispose();
     }
 
     private float setInitialX(){

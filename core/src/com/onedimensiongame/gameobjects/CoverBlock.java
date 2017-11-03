@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.onedimensiongame.utils.GameConstants;
 
-import static com.onedimensiongame.utils.GameConstants.GAP_SIZE;
-
 
 /**
  * Created by fabian.sanchez on 03/11/2017.
@@ -27,6 +25,10 @@ public class CoverBlock extends ShapeRenderer {
         this.begin(ShapeRenderer.ShapeType.Filled);
         this.rect(x, y, Gdx.graphics.getWidth(), (Gdx.graphics.getHeight()/ 2) - (GameConstants.GAP_SIZE /2 ));
         this.end();
+    }
+
+    public void disposeCoverBlock(){
+        this.dispose();
     }
 
 

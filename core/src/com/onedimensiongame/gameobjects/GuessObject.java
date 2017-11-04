@@ -47,7 +47,7 @@ public class GuessObject {
         }
     }
 
-    private void resetGuessObjectPosition(){
+    public void resetGuessObjectPosition(){
         sprite.setPosition(setInitialX(), setInitialY());
     }
 

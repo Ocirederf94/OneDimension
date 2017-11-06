@@ -39,12 +39,7 @@ public class GuessObject {
     }
 
     public void showKeyBoard(){
-        if (sprite.getY() < Gdx.graphics.getHeight() / 4 ){
-            Gdx.input.setOnscreenKeyboardVisible(true);
-        }
-        else {
-            Gdx.input.setOnscreenKeyboardVisible(false);
-        }
+        Gdx.input.setOnscreenKeyboardVisible( (sprite.getY() < Gdx.graphics.getHeight() / 4 ));
     }
 
     public void resetGuessObjectPosition(){
@@ -53,7 +48,7 @@ public class GuessObject {
 
     private void startGuessObject(){
         spriteBatch.begin();
-        sprite.draw(spriteBatch);
+        sprite.draw(spriteBatch,0.5f);
         spriteBatch.end();
     }
 

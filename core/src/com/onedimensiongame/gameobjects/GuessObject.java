@@ -1,70 +1,49 @@
 package com.onedimensiongame.gameobjects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_MOVE_SPEED;
 import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_SPRITE_SIZE;
 import static com.onedimensiongame.utils.GameConstants.LETTER_A;
-import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_MOVE_SPEED;
 
 
 /**
  * Created by fredy on 01/11/2017.
  */
 
-public class GuessObject {
-    private Texture texture;
-    private SpriteBatch spriteBatch;
-    private Sprite sprite;
-    private float positionX, positionY;
+public class GuessObject extends GameObject {
 
-
-    public GuessObject(){
-        texture = new Texture(LETTER_A);
-        sprite = new Sprite(texture);
-        sprite.setSize(GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
-        sprite.setColor(Color.BLUE);
-        spriteBatch = new SpriteBatch();
-        sprite.setPosition((positionX = setInitialX()), (positionY = setInitialY()));
-
-
+    public GuessObject(int positionX, int positionY) {
+        super(new Texture(LETTER_A), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
     }
 
-    public void renderGuessObject(){
-        startGuessObject();
-        moveGuessObject();
+    @Override
+    public void drawSprite(Sprite sprite, SpriteBatch spriteBatch) {
+        this.sprite.draw(spriteBatch);
     }
 
-    public void showKeyBoard(){
-        Gdx.input.setOnscreenKeyboardVisible( (sprite.getY() < Gdx.graphics.getHeight() / 4 ));
+
+    public void resetGuessObjectPosition() {
+        this.sprite.setPosition(setInitialX(), setInitialY());
     }
 
-    public void resetGuessObjectPosition(){
-        sprite.setPosition(setInitialX(), setInitialY());
+    public void moveGuessObject() {
+        this.sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
+        showKeyBoard();
     }
 
-    private void startGuessObject(){
-        spriteBatch.begin();
-        sprite.draw(spriteBatch,0.5f);
-        spriteBatch.end();
-    }
-
-    private void moveGuessObject(){
-        sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
-    }
-
-    public void disposeGuessObject(){
-        texture.dispose();
-        spriteBatch.dispose();
-    }
-
-    private float setInitialX(){
+    private float setInitialX() {
         return (Gdx.graphics.getWidth() / 2) - (GUESS_OBJECT_SPRITE_SIZE / 2);
     }
-    private float setInitialY(){
+
+    private float setInitialY() {
         return (Gdx.graphics.getHeight() - GUESS_OBJECT_SPRITE_SIZE);
+    }
+
+    private void showKeyBoard() {
+        Gdx.input.setOnscreenKeyboardVisible((this.sprite.getY() < Gdx.graphics.getHeight() / 4));
     }
 }

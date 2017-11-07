@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import static com.onedimensiongame.utils.GameConstants.GAP_SIZE;
+
 import static com.onedimensiongame.utils.GameConstants.OPAQUE_IMAGE;
 
 /**
@@ -15,8 +15,7 @@ import static com.onedimensiongame.utils.GameConstants.OPAQUE_IMAGE;
 public class CoverBlock extends GameObject {
 
     public CoverBlock(int positionX, int positionY) {
-        super(new Texture(OPAQUE_IMAGE), positionX, positionY, Gdx.graphics.getWidth(), (Gdx.graphics.getHeight() / 2) - GAP_SIZE);
-
+        super(new Texture(OPAQUE_IMAGE), positionX, positionY, Gdx.graphics.getWidth(), (Gdx.graphics.getHeight() / 2));
     }
 
     @Override

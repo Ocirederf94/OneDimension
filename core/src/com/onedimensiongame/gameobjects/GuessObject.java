@@ -16,7 +16,7 @@ import static com.onedimensiongame.utils.GameConstants.LETTER_A;
 
 public class GuessObject extends GameObject {
 
-    public GuessObject(int positionX, int positionY) {
+    public GuessObject(float positionX, float positionY) {
         super(new Texture(LETTER_A), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
     }
 

@@ -1,5 +1,6 @@
 package com.onedimensiongame.gameobjects;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,9 +14,11 @@ public abstract class GameObject {
     protected Sprite sprite;
 
 
-    public GameObject(Texture texture, int x, int y, int width, int height){
-        sprite = new Sprite(texture, x, y, width, height);
-//        sprite.setColor(Color.BLACK);
+    public GameObject(Texture texture, float x, float y, float width, float height){
+        sprite = new Sprite(texture);
+        sprite.setColor(Color.RED);
+        sprite.setSize(width, height);
+        sprite.setPosition(x, y);
         spriteBatch = new SpriteBatch();
     }
 

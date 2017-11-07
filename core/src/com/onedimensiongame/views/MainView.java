@@ -26,7 +26,7 @@ public class MainView {
     public MainView() {
         guessObject = new GuessObject((Gdx.graphics.getWidth() / 2) - (GUESS_OBJECT_SPRITE_SIZE / 2), (Gdx.graphics.getHeight() - GUESS_OBJECT_SPRITE_SIZE));
 
-        topBlock = new CoverBlock(0, Math.round((Gdx.graphics.getHeight()/ 2)+ (GAP_SIZE / 2)));
+        topBlock = new CoverBlock(0, Math.round((Gdx.graphics.getHeight()/ 2) + (GAP_SIZE / 2)));
         bottomBlock = new CoverBlock(0,0);
 
         retryButton = new GuessButtons(guessObject, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, GUESS_BUTTON_SIZE, GUESS_BUTTON_SIZE - (GUESS_BUTTON_SIZE / 4 ));
@@ -39,13 +39,13 @@ public class MainView {
     public void renderMainView() {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-
-        //topBlock.renderGameObject();
-        //bottomBlock.renderGameObject();
-
         guessObject.renderGameObject();
         guessObject.moveGuessObject();
+
+        topBlock.renderGameObject();
+        bottomBlock.renderGameObject();
+
+
 
         retryButton.renderButton();
     }

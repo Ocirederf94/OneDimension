@@ -32,7 +32,7 @@ public class GuessObject extends GameObject {
 
     public void moveGuessObject() {
         this.sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
-        showKeyBoard();
+        //showKeyBoard();
     }
 
     private float setInitialX() {

@@ -33,12 +33,12 @@ public class GuessButtons extends ImageButton {
         this.setHeight(height);
         stage = new Stage();
         inputProcessor = stage;
+        stage.addActor(this);
+        stage.act(Gdx.graphics.getDeltaTime());
         addCustomListener();
     }
 
     public void renderButton() {
-        stage.addActor(this);
-        stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
     }
 

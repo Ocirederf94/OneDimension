@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.onedimensiongame.gameobjects.CoverBlock;
 import com.onedimensiongame.gameobjects.GuessButtons;
 import com.onedimensiongame.gameobjects.GuessObject;
+import com.onedimensiongame.utils.CustomKeyboard;
 
 import static com.onedimensiongame.utils.GameConstants.GAP_SIZE;
 import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;
@@ -21,6 +22,7 @@ public class MainView {
     private GuessObject guessObject;
     private CoverBlock topBlock, bottomBlock;
     private GuessButtons retryButton;
+    private CustomKeyboard customKeyboard;
     private InputMultiplexer inputMultiplexer;
 
     public MainView() {
@@ -31,8 +33,10 @@ public class MainView {
 
         retryButton = new GuessButtons(guessObject, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, GUESS_BUTTON_SIZE, GUESS_BUTTON_SIZE - (GUESS_BUTTON_SIZE / 4 ));
 
+        customKeyboard = new CustomKeyboard(0, 0);
+
         inputMultiplexer = new InputMultiplexer();
-        addInputProcessor(retryButton.getInputProcessor());
+        addInputProcessor(retryButton.getInputProcessor(), customKeyboard.getInputProcessor());
         Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
@@ -45,7 +49,7 @@ public class MainView {
         topBlock.renderGameObject();
         bottomBlock.renderGameObject();
 
-
+        customKeyboard.renderKeyboard();
 
         retryButton.renderButton();
     }
@@ -55,6 +59,7 @@ public class MainView {
         topBlock.disposeGuessObject();
         bottomBlock.disposeGuessObject();
         retryButton.disposeGuessButtons();
+        customKeyboard.disposeKeyboard();
     }
 
     private void addInputProcessor(InputProcessor... inputProcessors){

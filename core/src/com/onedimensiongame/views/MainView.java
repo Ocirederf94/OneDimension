@@ -33,7 +33,7 @@ public class MainView {
 
         retryButton = new GuessButtons(guessObject, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, GUESS_BUTTON_SIZE, GUESS_BUTTON_SIZE - (GUESS_BUTTON_SIZE / 4 ));
 
-        customKeyboard = new CustomKeyboard(0, 0);
+        customKeyboard = new CustomKeyboard(0);
 
         inputMultiplexer = new InputMultiplexer();
         addInputProcessor(retryButton.getInputProcessor(), customKeyboard.getInputProcessor());

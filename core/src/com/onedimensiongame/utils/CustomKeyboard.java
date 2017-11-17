@@ -22,15 +22,14 @@ import static com.onedimensiongame.utils.GameConstants.DELETE;
 
 public class CustomKeyboard {
     private BitmapFont bitmapFont;
-    private float initialX, initialY, keysWidht, keysHeight;
-    int counter = 0;
+    private float initialY, keysWidht, keysHeight;
+    private int counter = 0;
     private Stage stage;
     private InputProcessor inputProcessor;
     private SpriteBatch spriteBatch;
     private String guessString = "";
 
-    public CustomKeyboard(float initialX, float initialY) {
-        this.initialX = initialX;
+    public CustomKeyboard(float initialY) {
         this.initialY = initialY;
         this.keysWidht = Gdx.graphics.getWidth() / 10;
         this.keysHeight = (Gdx.graphics.getHeight() / 3) / 4;

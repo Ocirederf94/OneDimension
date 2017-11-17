@@ -35,6 +35,10 @@ public class GuessObject extends GameObject {
         //showKeyBoard();
     }
 
+    public Sprite getSprite(){
+        return sprite;
+    }
+
     private float setInitialX() {
         return (Gdx.graphics.getWidth() / 2) - (GUESS_OBJECT_SPRITE_SIZE / 2);
     }

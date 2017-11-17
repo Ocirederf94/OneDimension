@@ -49,7 +49,7 @@ public class MainView {
         topBlock.renderGameObject();
         bottomBlock.renderGameObject();
 
-        customKeyboard.renderKeyboard();
+        customKeyboard.renderKeyboard(guessObject);
 
         retryButton.renderButton();
     }

@@ -12,6 +12,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.onedimensiongame.gameobjects.GuessObject;
+
+import static com.onedimensiongame.utils.GameConstants.DELETE;
 
 /**
  * Created by fredy on 15/11/2017.
@@ -39,9 +42,14 @@ public class CustomKeyboard {
         stage.act(Gdx.graphics.getDeltaTime());
     }
 
-    public void renderKeyboard() {
-        stage.draw();
-        createTextField(counter);
+    public void renderKeyboard(GuessObject guessObject) {
+        if (guessObject.getSprite().getY() < (Gdx.graphics.getHeight() / 4)){
+            stage.draw();
+            createTextField(counter);
+        }
+        else {
+            guessString = "";
+        }
     }
 
     public void disposeKeyboard() {
@@ -77,12 +85,13 @@ public class CustomKeyboard {
         bitmapFont.getData().setScale(10);
         spriteBatch.end();
     }
-    
+
     private ChangeListener startKeyListener(){
       return new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                guessString += actor.getName();
+                guessString = actor.getName().equals(DELETE) ? guessString.equals("") ? "" : guessString.substring(0, guessString.length() -1)
+                        : guessString.concat(actor.getName());
             }
         };
     }

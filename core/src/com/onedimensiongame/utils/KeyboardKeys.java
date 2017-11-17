@@ -2,6 +2,7 @@ package com.onedimensiongame.utils;
 
 import static com.onedimensiongame.utils.GameConstants.LETTER_A;
 import static com.onedimensiongame.utils.GameConstants.RETRY_BUTTON;
+import static com.onedimensiongame.utils.GameConstants.DELETE;
 
 /**
  * Created by fredy on 16/11/2017.
@@ -16,7 +17,7 @@ public enum KeyboardKeys {
     NN(LETTER_A, "N"),
     MM(LETTER_A, "M"),
     SPACE(LETTER_A, " "),
-    BACKSPACE(LETTER_A, ""),
+    BACKSPACE(RETRY_BUTTON, DELETE),
     ENTER(LETTER_A, "\n"),
 
     AA(LETTER_A, "A"),

@@ -31,9 +31,9 @@ public class MainView {
         topBlock = new CoverBlock(0, Math.round((Gdx.graphics.getHeight()/ 2) + (GAP_SIZE / 2)));
         bottomBlock = new CoverBlock(0,0);
 
-        retryButton = new GuessButtons(guessObject, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, GUESS_BUTTON_SIZE, GUESS_BUTTON_SIZE - (GUESS_BUTTON_SIZE / 4 ));
+        retryButton = new GuessButtons(guessObject, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE);
 
-        customKeyboard = new CustomKeyboard(0);
+        customKeyboard = new CustomKeyboard(0, guessObject);
 
         inputMultiplexer = new InputMultiplexer();
         addInputProcessor(retryButton.getInputProcessor(), customKeyboard.getInputProcessor());
@@ -49,7 +49,7 @@ public class MainView {
         topBlock.renderGameObject();
         bottomBlock.renderGameObject();
 
-        customKeyboard.renderKeyboard(guessObject);
+        customKeyboard.renderKeyboard();
 
         retryButton.renderButton();
     }

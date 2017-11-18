@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.onedimensiongame.gameobjects.GuessObject;
 
 import static com.onedimensiongame.utils.GameConstants.DELETE;
+import static com.onedimensiongame.utils.GameConstants.SUBMIT;
 
 /**
  * Created by fredy on 15/11/2017.
@@ -28,8 +29,10 @@ public class CustomKeyboard {
     private InputProcessor inputProcessor;
     private SpriteBatch spriteBatch;
     private String guessString = "";
+    private GuessObject guessObject;
 
-    public CustomKeyboard(float initialY) {
+    public CustomKeyboard(float initialY, GuessObject guessObject) {
+        this.guessObject = guessObject;
         this.initialY = initialY;
         this.keysWidht = Gdx.graphics.getWidth() / 10;
         this.keysHeight = (Gdx.graphics.getHeight() / 3) / 4;
@@ -41,7 +44,7 @@ public class CustomKeyboard {
         stage.act(Gdx.graphics.getDeltaTime());
     }
 
-    public void renderKeyboard(GuessObject guessObject) {
+    public void renderKeyboard() {
         if (guessObject.getSprite().getY() < (Gdx.graphics.getHeight() / 4)){
             stage.draw();
             createTextField(counter);
@@ -89,8 +92,15 @@ public class CustomKeyboard {
       return new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                guessString = actor.getName().equals(DELETE) ? guessString.equals("") ? "" : guessString.substring(0, guessString.length() -1)
-                        : guessString.concat(actor.getName());
+                if (!actor.getName().equals(SUBMIT)){
+                    guessString = actor.getName().equals(DELETE) ? guessString.equals("") ? "" : guessString.substring(0, guessString.length() -1)
+                            : guessString.concat(actor.getName());
+                }
+                else {
+                    if (guessString.equals(guessObject.getSolution())){
+                        return;
+                    }
+                }
             }
         };
     }

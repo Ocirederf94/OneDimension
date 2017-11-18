@@ -8,8 +8,9 @@ public class GameConstants {
 
     public static final String LETTER_A = "letters/LETTER_A.png";
     public static final String RETRY_BUTTON = "buttons/retry_button.png";
-    public static final String OPAQUE_IMAGE= "blocks/opaque.png";
-    public static final String DELETE= "DELETE";
+    public static final String OPAQUE_IMAGE = "blocks/opaque.png";
+    public static final String DELETE = "DELETE";
+    public static final String SUBMIT = "SUBMIT";
 
     public static final float GUESS_OBJECT_SPRITE_SIZE = 500f;
     public static final float GAP_SIZE = 25f;

@@ -25,9 +25,8 @@ public class GuessObject extends GameObject {
         this.sprite.draw(spriteBatch);
     }
 
-
-    public void resetGuessObjectPosition() {
-        this.sprite.setPosition(setInitialX(), setInitialY());
+    public String getSolution(){
+        return "";
     }
 
     public void moveGuessObject() {
@@ -37,6 +36,10 @@ public class GuessObject extends GameObject {
 
     public Sprite getSprite(){
         return sprite;
+    }
+
+    public void resetGuessObjectPosition() {
+        this.sprite.setPosition(setInitialX(), setInitialY());
     }
 
     private float setInitialX() {

@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 
+import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;
 import static com.onedimensiongame.utils.GameConstants.RETRY_BUTTON;
 
 /**
@@ -23,14 +24,14 @@ public class GuessButtons extends ImageButton {
     private String texturePath;
 
 
-    public GuessButtons(GuessObject guessObject, String texturePath, float x, float y, float width, float height) {
+    public GuessButtons(GuessObject guessObject, String texturePath, float x, float y) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(texturePath))));
         this.texturePath = texturePath;
         this.guessObject = guessObject;
         this.setX(x);
         this.setY(y);
-        this.setWidth(width);
-        this.setHeight(height);
+        this.setWidth(GUESS_BUTTON_SIZE);
+        this.setHeight(GUESS_BUTTON_SIZE - (GUESS_BUTTON_SIZE / 4 ));
         stage = new Stage();
         inputProcessor = stage;
         stage.addActor(this);

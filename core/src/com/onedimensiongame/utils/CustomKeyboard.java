@@ -34,8 +34,8 @@ public class CustomKeyboard {
     public CustomKeyboard(float initialY, GuessObject guessObject) {
         this.guessObject = guessObject;
         this.initialY = initialY;
-        this.keysWidht = Gdx.graphics.getWidth() / 10;
-        this.keysHeight = (Gdx.graphics.getHeight() / 3) / 4;
+        this.keysWidht = (Gdx.graphics.getWidth() / 10)-8;
+        this.keysHeight = ((Gdx.graphics.getHeight() / 3) / 4)-55;
         this.stage = new Stage();
         this.inputProcessor = stage;
         spriteBatch = new SpriteBatch();
@@ -66,12 +66,13 @@ public class CustomKeyboard {
         KeyboardKeys[] keysArray = KeyboardKeys.values();
         ChangeListener changeListener = startKeyListener();
         int keysArrayIndex = 0;
-        while (counter != keysHeight * 4) {
+        while (counter != (keysHeight) * 4) {
             for (int i = 0; i < 10; i++) {
                 ImageButton tempImageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(keysArray[keysArrayIndex].getImagePath()))));
                 tempImageButton.setName(keysArray[keysArrayIndex].getText());
                 tempImageButton.setPosition(keysWidht * i, initialY + counter);
                 tempImageButton.setSize(keysWidht, keysWidht);
+                tempImageButton.getImage().setFillParent(true);
                 stage.addActor(tempImageButton);
                 tempImageButton.addListener(changeListener);
                 keysArrayIndex++;

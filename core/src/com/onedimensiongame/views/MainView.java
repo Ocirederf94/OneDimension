@@ -13,6 +13,9 @@ import static com.onedimensiongame.utils.GameConstants.GAP_SIZE;
 import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;
 import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_SPRITE_SIZE;
 import static com.onedimensiongame.utils.GameConstants.RETRY_BUTTON;
+import static com.onedimensiongame.utils.GameConstants.RETRY;
+import static com.onedimensiongame.utils.GameConstants.SUBMIT;
+
 
 /**
  * Created by fredy on 01/11/2017.
@@ -22,6 +25,7 @@ public class MainView {
     private GuessObject guessObject;
     private CoverBlock topBlock, bottomBlock;
     private GuessButtons retryButton;
+    private GuessButtons submitButton;
     private CustomKeyboard customKeyboard;
     private InputMultiplexer inputMultiplexer;
 
@@ -31,12 +35,13 @@ public class MainView {
         topBlock = new CoverBlock(0, Math.round((Gdx.graphics.getHeight()/ 2) + (GAP_SIZE / 2)));
         bottomBlock = new CoverBlock(0,0);
 
-        retryButton = new GuessButtons(guessObject, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE);
+        customKeyboard = new CustomKeyboard(guessObject);
 
-        customKeyboard = new CustomKeyboard(0, guessObject);
+        retryButton = new GuessButtons(guessObject, RETRY, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
+        submitButton = new GuessButtons(guessObject,SUBMIT, RETRY_BUTTON, Gdx.graphics.getWidth() - GUESS_BUTTON_SIZE, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
 
         inputMultiplexer = new InputMultiplexer();
-        addInputProcessor(retryButton.getInputProcessor(), customKeyboard.getInputProcessor());
+        addInputProcessor(retryButton.getInputProcessor(), submitButton.getInputProcessor(), customKeyboard.getInputProcessor());
         Gdx.input.setInputProcessor(inputMultiplexer);
     }
 
@@ -52,6 +57,7 @@ public class MainView {
         customKeyboard.renderKeyboard();
 
         retryButton.renderButton();
+        submitButton.renderButton();
     }
 
     public void disposeMainView() {
@@ -59,6 +65,7 @@ public class MainView {
         topBlock.disposeGuessObject();
         bottomBlock.disposeGuessObject();
         retryButton.disposeGuessButtons();
+        submitButton.disposeGuessButtons();
         customKeyboard.disposeKeyboard();
     }
 

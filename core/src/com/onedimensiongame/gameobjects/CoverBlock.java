@@ -23,5 +23,4 @@ public class CoverBlock extends GameObject {
        sprite.draw(spriteBatch,0.5f);
     }
 
-
 }

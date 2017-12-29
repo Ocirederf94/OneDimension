@@ -23,7 +23,7 @@ import static com.onedimensiongame.utils.GameConstants.SUBMIT;
 
 public class CustomKeyboard {
     private BitmapFont bitmapFont;
-    private float initialY, keysWidht, keysHeight;
+    private float keysWidht, keysHeight;
     private int counter = 0;
     private Stage stage;
     private InputProcessor inputProcessor;
@@ -31,17 +31,19 @@ public class CustomKeyboard {
     private String guessString = "";
     private GuessObject guessObject;
 
-    public CustomKeyboard(float initialY, GuessObject guessObject) {
+    public CustomKeyboard(GuessObject guessObject) {
         this.guessObject = guessObject;
-        this.initialY = initialY;
-        this.keysWidht = (Gdx.graphics.getWidth() / 10)-8;
-        this.keysHeight = ((Gdx.graphics.getHeight() / 3) / 4)-55;
+        this.keysWidht = (Gdx.graphics.getWidth() / 10);
+        this.keysHeight = ((Gdx.graphics.getHeight() / 3) / 4);
         this.stage = new Stage();
         this.inputProcessor = stage;
         spriteBatch = new SpriteBatch();
         bitmapFont = new BitmapFont();
+        bitmapFont.setColor(Color.YELLOW);
+        bitmapFont.getData().setScale(10);
         createKeyboard();
         stage.act(Gdx.graphics.getDeltaTime());
+
     }
 
     public void renderKeyboard() {
@@ -62,16 +64,21 @@ public class CustomKeyboard {
         return inputProcessor;
     }
 
+    public String getGuessString(){
+        return guessString;
+    }
+
     private void createKeyboard() {
-        KeyboardKeys[] keysArray = KeyboardKeys.values();
+        KeyboardKeysEnum[] keysArray = KeyboardKeysEnum.values();
         ChangeListener changeListener = startKeyListener();
         int keysArrayIndex = 0;
+        float initialY = 0;
         while (counter != (keysHeight) * 4) {
             for (int i = 0; i < 10; i++) {
                 ImageButton tempImageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(keysArray[keysArrayIndex].getImagePath()))));
                 tempImageButton.setName(keysArray[keysArrayIndex].getText());
-                tempImageButton.setPosition(keysWidht * i, initialY + counter);
-                tempImageButton.setSize(keysWidht, keysWidht);
+                //tempImageButton.setPosition(keysWidht * i, initialY + counter);
+                tempImageButton.setBounds(keysWidht * i, initialY + counter, keysWidht, keysHeight);
                 tempImageButton.getImage().setFillParent(true);
                 stage.addActor(tempImageButton);
                 tempImageButton.addListener(changeListener);
@@ -83,9 +90,7 @@ public class CustomKeyboard {
 
     private void createTextField(float counter){
         spriteBatch.begin();
-        bitmapFont.setColor(Color.YELLOW);
         bitmapFont.draw(spriteBatch, guessString, 0, counter + keysHeight);
-        bitmapFont.getData().setScale(10);
         spriteBatch.end();
     }
 

@@ -46,7 +46,7 @@ import static com.onedimensiongame.utils.GameConstants.Z_KEY;
  * Created by fredy on 16/11/2017.
  */
 
-public enum KeyboardKeys {
+public enum KeyboardKeysEnum {
     ZZ(Z_KEY, "Z"),
     XX(X_KEY, "X"),
     CC(C_KEY, "C"),
@@ -95,7 +95,7 @@ public enum KeyboardKeys {
     private String imagePath;
     private String text;
 
-    KeyboardKeys(String imagePath, String text) {
+    KeyboardKeysEnum(String imagePath, String text) {
         this.imagePath = imagePath;
         this.text = text;
     }

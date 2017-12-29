@@ -31,7 +31,6 @@ public class GuessObject extends GameObject {
 
     public void moveGuessObject() {
         this.sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
-        //showKeyBoard();
     }
 
     public Sprite getSprite(){
@@ -50,7 +49,4 @@ public class GuessObject extends GameObject {
         return (Gdx.graphics.getHeight() - GUESS_OBJECT_SPRITE_SIZE);
     }
 
-    private void showKeyBoard() {
-        Gdx.input.setOnscreenKeyboardVisible((this.sprite.getY() < Gdx.graphics.getHeight() / 4));
-    }
 }

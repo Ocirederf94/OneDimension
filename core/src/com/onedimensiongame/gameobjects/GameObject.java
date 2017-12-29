@@ -12,14 +12,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class GameObject {
     protected SpriteBatch spriteBatch;
     protected Sprite sprite;
+    private Texture texture;
 
 
     public GameObject(Texture texture, float x, float y, float width, float height){
-        sprite = new Sprite(texture);
-        sprite.setColor(Color.RED);
-        sprite.setSize(width, height);
-        sprite.setPosition(x, y);
-        spriteBatch = new SpriteBatch();
+        this.texture = texture;
+        this.sprite = new Sprite(texture);
+        this.sprite.setColor(Color.RED);
+        this.sprite.setSize(width, height);
+        this.sprite.setPosition(x, y);
+        this.spriteBatch = new SpriteBatch();
     }
 
     public void renderGameObject(){
@@ -33,4 +35,5 @@ public abstract class GameObject {
     }
 
     public abstract void drawSprite(Sprite sprite, SpriteBatch spriteBatch);
+
 }

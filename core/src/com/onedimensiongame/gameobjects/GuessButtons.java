@@ -9,9 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.onedimensiongame.utils.CustomKeyboard;
 
 import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;
-import static com.onedimensiongame.utils.GameConstants.RETRY_BUTTON;
+import static com.onedimensiongame.utils.GameConstants.RETRY;
+import static com.onedimensiongame.utils.GameConstants.SUBMIT;
 
 /**
  * Created by fredy on 04/11/2017.
@@ -21,12 +23,15 @@ public class GuessButtons extends ImageButton {
     private GuessObject guessObject;
     private Stage stage;
     private InputProcessor inputProcessor;
-    private String texturePath;
+    private String buttonId;
+    private CustomKeyboard customKeyboard;
 
 
-    public GuessButtons(GuessObject guessObject, String texturePath, float x, float y) {
+
+    public GuessButtons(GuessObject guessObject,String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(texturePath))));
-        this.texturePath = texturePath;
+        this.customKeyboard = customKeyboard;
+        this.buttonId = buttonId;
         this.guessObject = guessObject;
         this.setX(x);
         this.setY(y);
@@ -55,9 +60,17 @@ public class GuessButtons extends ImageButton {
         this.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (texturePath.equals(RETRY_BUTTON)) {
+                if (buttonId.equals(RETRY)) {
                     guessObject.resetGuessObjectPosition();
                     Gdx.input.setOnscreenKeyboardVisible(false);
+                }
+                else if (buttonId.equals(SUBMIT)){
+                    if (customKeyboard.getGuessString().equals(guessObject.getSolution())){
+
+                    }
+                    else {
+                        guessObject.resetGuessObjectPosition();
+                    }
                 }
             }
         });

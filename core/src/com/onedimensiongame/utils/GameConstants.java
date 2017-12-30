@@ -50,6 +50,7 @@ public class GameConstants {
     public static final String ZERO_KEY="keys/zero.png";
 
     public static final String RETRY_BUTTON = "buttons/retry_button.png";
+    public static final String SUBMIT_BUTTON = "buttons/submit_button.png";
     public static final String OPAQUE_IMAGE = "blocks/opaque.png";
     public static final String DELETE = "DELETE";
     public static final String SUBMIT = "SUBMIT";

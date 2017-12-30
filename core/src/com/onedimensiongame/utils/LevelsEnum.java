@@ -1,5 +1,6 @@
 package com.onedimensiongame.utils;
 
+import static com.onedimensiongame.utils.GameConstants.LETTER_A;
 import static com.onedimensiongame.utils.GameConstants.RETRY_BUTTON;
 
 /**
@@ -7,7 +8,7 @@ import static com.onedimensiongame.utils.GameConstants.RETRY_BUTTON;
  */
 
 public enum LevelsEnum {
-    //WORD_A(LETTER_A, "A"),
+    WORD_A(LETTER_A, "A"),
     WORD_RETRY(RETRY_BUTTON, "RETRY");
 
     private String imagePath;

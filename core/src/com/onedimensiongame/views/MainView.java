@@ -16,6 +16,7 @@ import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_SPRITE_SIZE;
 import static com.onedimensiongame.utils.GameConstants.RETRY_BUTTON;
 import static com.onedimensiongame.utils.GameConstants.RETRY;
 import static com.onedimensiongame.utils.GameConstants.SUBMIT;
+import static com.onedimensiongame.utils.GameConstants.SUBMIT_BUTTON;
 
 
 /**
@@ -41,7 +42,7 @@ public class MainView {
         customKeyboard = new CustomKeyboard(guessObject);
 
         retryButton = new GuessButtons(guessObject, levelFactory, RETRY, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
-        submitButton = new GuessButtons(guessObject, levelFactory, SUBMIT, RETRY_BUTTON, Gdx.graphics.getWidth() - GUESS_BUTTON_SIZE, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
+        submitButton = new GuessButtons(guessObject, levelFactory, SUBMIT, SUBMIT_BUTTON, Gdx.graphics.getWidth() - GUESS_BUTTON_SIZE, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
 
         inputMultiplexer = new InputMultiplexer();
         addInputProcessor(retryButton.getInputProcessor(), submitButton.getInputProcessor(), customKeyboard.getInputProcessor());

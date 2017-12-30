@@ -8,6 +8,7 @@ import com.onedimensiongame.gameobjects.CoverBlock;
 import com.onedimensiongame.gameobjects.GuessButtons;
 import com.onedimensiongame.gameobjects.GuessObject;
 import com.onedimensiongame.utils.CustomKeyboard;
+import com.onedimensiongame.utils.LevelFactory;
 
 import static com.onedimensiongame.utils.GameConstants.GAP_SIZE;
 import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;
@@ -28,17 +29,19 @@ public class MainView {
     private GuessButtons submitButton;
     private CustomKeyboard customKeyboard;
     private InputMultiplexer inputMultiplexer;
+    private LevelFactory levelFactory;
 
     public MainView() {
         guessObject = new GuessObject((Gdx.graphics.getWidth() / 2) - (GUESS_OBJECT_SPRITE_SIZE / 2), (Gdx.graphics.getHeight() - GUESS_OBJECT_SPRITE_SIZE));
+        levelFactory = new LevelFactory();
 
         topBlock = new CoverBlock(0, Math.round((Gdx.graphics.getHeight()/ 2) + (GAP_SIZE / 2)));
         bottomBlock = new CoverBlock(0,0);
 
         customKeyboard = new CustomKeyboard(guessObject);
 
-        retryButton = new GuessButtons(guessObject, RETRY, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
-        submitButton = new GuessButtons(guessObject,SUBMIT, RETRY_BUTTON, Gdx.graphics.getWidth() - GUESS_BUTTON_SIZE, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
+        retryButton = new GuessButtons(guessObject, levelFactory, RETRY, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
+        submitButton = new GuessButtons(guessObject, levelFactory, SUBMIT, RETRY_BUTTON, Gdx.graphics.getWidth() - GUESS_BUTTON_SIZE, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
 
         inputMultiplexer = new InputMultiplexer();
         addInputProcessor(retryButton.getInputProcessor(), submitButton.getInputProcessor(), customKeyboard.getInputProcessor());

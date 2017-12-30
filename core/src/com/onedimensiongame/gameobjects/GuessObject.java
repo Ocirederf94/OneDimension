@@ -15,9 +15,12 @@ import static com.onedimensiongame.utils.GameConstants.LETTER_A;
  */
 
 public class GuessObject extends GameObject {
+    private Texture texture;
+    private String solution;
 
     public GuessObject(float positionX, float positionY) {
         super(new Texture(LETTER_A), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
+        this.solution = "A";
     }
 
     @Override
@@ -26,7 +29,11 @@ public class GuessObject extends GameObject {
     }
 
     public String getSolution(){
-        return "";
+        return solution;
+    }
+
+    public void setSolution(String newSolution){
+        this.solution = newSolution;
     }
 
     public void moveGuessObject() {
@@ -35,6 +42,10 @@ public class GuessObject extends GameObject {
 
     public Sprite getSprite(){
         return sprite;
+    }
+
+    public void setTexture(String path){
+        this.sprite.setTexture(new Texture(path));
     }
 
     public void resetGuessObjectPosition() {

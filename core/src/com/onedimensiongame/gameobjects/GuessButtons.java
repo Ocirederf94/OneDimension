@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.onedimensiongame.utils.CustomKeyboard;
+import com.onedimensiongame.utils.LevelFactory;
+import com.onedimensiongame.utils.LevelsEnum;
 
 import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;
 import static com.onedimensiongame.utils.GameConstants.RETRY;
@@ -25,12 +27,14 @@ public class GuessButtons extends ImageButton {
     private InputProcessor inputProcessor;
     private String buttonId;
     private CustomKeyboard customKeyboard;
+    private LevelFactory levelFactory;
 
 
 
-    public GuessButtons(GuessObject guessObject,String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
+    public GuessButtons(GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(texturePath))));
         this.customKeyboard = customKeyboard;
+        this.levelFactory = levelFactory;
         this.buttonId = buttonId;
         this.guessObject = guessObject;
         this.setX(x);
@@ -65,8 +69,11 @@ public class GuessButtons extends ImageButton {
                     Gdx.input.setOnscreenKeyboardVisible(false);
                 }
                 else if (buttonId.equals(SUBMIT)){
-                    if (customKeyboard.getGuessString().equals(guessObject.getSolution())){
-
+                    if (customKeyboard.getGuessString().toUpperCase().equals(guessObject.getSolution())){
+                        LevelsEnum levelsEnum = levelFactory.getRandomLevel();
+                        guessObject.setSolution(levelsEnum.getSolution());
+                        guessObject.setTexture(levelsEnum.getImagePath());
+                        guessObject.resetGuessObjectPosition();
                     }
                     else {
                         guessObject.resetGuessObjectPosition();

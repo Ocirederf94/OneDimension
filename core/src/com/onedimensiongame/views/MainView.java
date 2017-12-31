@@ -62,6 +62,9 @@ public class MainView {
 
         retryButton.renderButton();
         submitButton.renderButton();
+
+        levelFactory.rederLevelFeedBack(submitButton);
+
     }
 
     public void disposeMainView() {
@@ -71,6 +74,7 @@ public class MainView {
         retryButton.disposeGuessButtons();
         submitButton.disposeGuessButtons();
         customKeyboard.disposeKeyboard();
+        levelFactory.disposeLevelFactory();
     }
 
     private void addInputProcessor(InputProcessor... inputProcessors){

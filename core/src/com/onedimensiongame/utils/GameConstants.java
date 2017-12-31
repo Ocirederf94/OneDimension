@@ -52,6 +52,10 @@ public class GameConstants {
     public static final String RETRY_BUTTON = "buttons/retry_button.png";
     public static final String SUBMIT_BUTTON = "buttons/submit_button.png";
     public static final String OPAQUE_IMAGE = "blocks/opaque.png";
+
+    public static final String RIGHT_FEEDBACK = "menu/right_feedback.png";
+    public static final String WRONG_FEEDBACK = "menu/wrong_feedback.png";
+
     public static final String DELETE = "DELETE";
     public static final String SUBMIT = "SUBMIT";
     public static final String RETRY = "RETRY";
@@ -60,6 +64,8 @@ public class GameConstants {
     public static final float GAP_SIZE = 25f;
     public static final float KEYS_SIZE = 380f;
     public static final float GUESS_BUTTON_SIZE = 200f;
-    public static final float GUESS_OBJECT_MOVE_SPEED = 3f;
+    public static final float GUESS_OBJECT_MOVE_SPEED = 2f;
+
+    public static final long FEEDBACK_TIME = 2000;
 
 }

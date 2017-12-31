@@ -13,6 +13,10 @@ import com.onedimensiongame.utils.CustomKeyboard;
 import com.onedimensiongame.utils.LevelFactory;
 import com.onedimensiongame.utils.LevelsEnum;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.onedimensiongame.utils.GameConstants.FEEDBACK_TIME;
 import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;
 import static com.onedimensiongame.utils.GameConstants.RETRY;
 import static com.onedimensiongame.utils.GameConstants.SUBMIT;
@@ -28,11 +32,14 @@ public class GuessButtons extends ImageButton {
     private String buttonId;
     private CustomKeyboard customKeyboard;
     private LevelFactory levelFactory;
-
+    private boolean toRender = false;
+    private boolean rightAnswer = false;
+    private Timer timer;
 
 
     public GuessButtons(GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(texturePath))));
+        this.timer = new Timer();
         this.customKeyboard = customKeyboard;
         this.levelFactory = levelFactory;
         this.buttonId = buttonId;
@@ -40,7 +47,7 @@ public class GuessButtons extends ImageButton {
         this.setX(x);
         this.setY(y);
         this.setWidth(GUESS_BUTTON_SIZE);
-        this.setHeight(GUESS_BUTTON_SIZE - (GUESS_BUTTON_SIZE / 4 ));
+        this.setHeight(GUESS_BUTTON_SIZE - (GUESS_BUTTON_SIZE / 4));
         stage = new Stage();
         inputProcessor = stage;
         stage.addActor(this);
@@ -60,26 +67,54 @@ public class GuessButtons extends ImageButton {
         stage.dispose();
     }
 
+    public boolean getToRender() {
+        return toRender;
+    }
+
+    public void setToRender(boolean toRender) {
+        this.toRender = toRender;
+    }
+
+    public boolean getRightAnswer() {
+        return rightAnswer;
+    }
+
     private void addCustomListener() {
         this.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                LevelsEnum levelsEnum;
                 if (buttonId.equals(RETRY)) {
                     guessObject.resetGuessObjectPosition();
                     Gdx.input.setOnscreenKeyboardVisible(false);
-                }
-                else if (buttonId.equals(SUBMIT)){
-                    if (customKeyboard.getGuessString().toUpperCase().equals(guessObject.getSolution())){
-                        LevelsEnum levelsEnum = levelFactory.getRandomLevel();
+                } else if (buttonId.equals(SUBMIT)) {
+                    if (customKeyboard.getGuessString().toUpperCase().equals(guessObject.getSolution())) {
+                        toRender = true;
+                        rightAnswer = true;
+                        setTimer();
+
+                        levelsEnum = levelFactory.getRandomLevel();
                         guessObject.setSolution(levelsEnum.getSolution());
                         guessObject.setTexture(levelsEnum.getImagePath());
-                        guessObject.resetGuessObjectPosition();
-                    }
-                    else {
-                        guessObject.resetGuessObjectPosition();
+
+                    } else {
+                        toRender = true;
+                        rightAnswer = false;
+                        setTimer();
                     }
                 }
             }
         });
     }
+
+    private void setTimer() {
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                guessObject.resetGuessObjectPosition();
+            }
+        }, FEEDBACK_TIME);
+    }
+
+
 }

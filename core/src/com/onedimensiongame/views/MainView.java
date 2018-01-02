@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.onedimensiongame.gameobjects.CoverBlock;
 import com.onedimensiongame.gameobjects.GuessButtons;
 import com.onedimensiongame.gameobjects.GuessObject;
-import com.onedimensiongame.utils.CustomKeyboard;
-import com.onedimensiongame.utils.LevelFactory;
+import com.onedimensiongame.utils.keyboard.CustomKeyboard;
+import com.onedimensiongame.utils.levels.LevelFactory;
 
 import static com.onedimensiongame.utils.GameConstants.GAP_SIZE;
 import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;

@@ -1,4 +1,4 @@
-package com.onedimensiongame.utils;
+package com.onedimensiongame.utils.keyboard;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;

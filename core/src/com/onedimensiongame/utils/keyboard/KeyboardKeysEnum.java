@@ -1,4 +1,4 @@
-package com.onedimensiongame.utils;
+package com.onedimensiongame.utils.keyboard;
 
 import static com.onedimensiongame.utils.GameConstants.A_KEY;
 import static com.onedimensiongame.utils.GameConstants.B_KEY;

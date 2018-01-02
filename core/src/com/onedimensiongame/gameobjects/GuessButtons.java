@@ -9,8 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.onedimensiongame.utils.CustomKeyboard;
-import com.onedimensiongame.utils.LevelFactory;
+import com.onedimensiongame.utils.keyboard.CustomKeyboard;
+import com.onedimensiongame.utils.levels.LevelFactory;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -94,7 +94,7 @@ public class GuessButtons extends ImageButton {
 
                         level = levelFactory.getRandomLevel();
                         guessObject.setTexture(level.substring(0, level.indexOf(" ")));
-                        guessObject.setSolution(level.substring(level.indexOf(" "), level.length()));
+                        guessObject.setSolution(level.substring(level.indexOf(" ") + 1, level.length()));
 
                     } else {
                         toRender = true;

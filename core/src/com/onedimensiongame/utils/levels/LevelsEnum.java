@@ -1,4 +1,4 @@
-package com.onedimensiongame.utils;
+package com.onedimensiongame.utils.levels;
 
 import static com.onedimensiongame.utils.GameConstants.LETTER_A;
 import static com.onedimensiongame.utils.GameConstants.RETRY_BUTTON;

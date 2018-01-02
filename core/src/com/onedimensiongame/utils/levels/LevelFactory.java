@@ -1,4 +1,4 @@
-package com.onedimensiongame.utils;
+package com.onedimensiongame.utils.levels;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -8,9 +8,6 @@ import com.onedimensiongame.gameobjects.GuessButtons;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,27 +35,21 @@ public class LevelFactory {
     private Map<String, String> guessObjectsMap;
 
     public LevelFactory() {
-        try {
-            this.bufferedReader = new BufferedReader(new FileReader("files/OriginalLevels.txt"));
-            this.bufferedWriter = new BufferedWriter(new FileWriter("files/ModifiedLevels.txt"));
-            this.guessObjectsMap = new HashMap<String, String>();
-            getLevelsFromFile();
+        this.bufferedReader = new BufferedReader(Gdx.files.internal("files/OriginalLevels.txt").reader());
+        //this.bufferedWriter = new BufferedWriter(new FileWriter(Gdx.files.internal("files/ChangedLevels.txt").file()));
+        this.guessObjectsMap = new HashMap<String, String>();
+        getLevelsFromFile();
 
-            this.timer = new Timer();
-            this.rand = new Random();
+        this.timer = new Timer();
+        this.rand = new Random();
 
-            this.levelCleared = new Texture(RIGHT_FEEDBACK);
-            this.levelFailed = new Texture(WRONG_FEEDBACK);
+        this.levelCleared = new Texture(RIGHT_FEEDBACK);
+        this.levelFailed = new Texture(WRONG_FEEDBACK);
 
-            this.spriteBatch = new SpriteBatch();
-            this.sprite = new Sprite();
-            this.sprite.setSize(200, 200);
-            this.sprite.setPosition(Gdx.graphics.getWidth() - (levelCleared.getWidth() / 2), Gdx.graphics.getHeight() - (levelCleared.getHeight() / 2));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.spriteBatch = new SpriteBatch();
+        this.sprite = new Sprite();
+        this.sprite.setSize(200, 200);
+        this.sprite.setPosition(Gdx.graphics.getWidth() - (levelCleared.getWidth() / 2), Gdx.graphics.getHeight() - (levelCleared.getHeight() / 2));
     }
 
     public void renderLevelFeedBack(final GuessButtons guessButton) {
@@ -81,8 +72,8 @@ public class LevelFactory {
     }
 
     public String getRandomLevel() {
-        String[] tempArray = (String[]) guessObjectsMap.keySet().toArray();
-        String key = tempArray[rand.nextInt(tempArray.length - 1)];
+        Object[] tempArray = guessObjectsMap.keySet().toArray();
+        String key = (String) tempArray[rand.nextInt(tempArray.length - 1)];
         return key + " " + guessObjectsMap.get(key);
     }
 
@@ -91,7 +82,7 @@ public class LevelFactory {
         try {
             while ((tempString = bufferedReader.readLine()) != null) {
                 String path = tempString.substring(0, tempString.indexOf(" "));
-                String solution = tempString.substring(tempString.indexOf(" "), tempString.length());
+                String solution = tempString.substring(tempString.indexOf(" ") + 1, tempString.length());
                 guessObjectsMap.put(path, solution);
             }
             bufferedReader.close();

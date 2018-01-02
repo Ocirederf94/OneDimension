@@ -63,7 +63,7 @@ public class MainView {
         retryButton.renderButton();
         submitButton.renderButton();
 
-        levelFactory.rederLevelFeedBack(submitButton);
+        levelFactory.renderLevelFeedBack(submitButton);
 
     }
 

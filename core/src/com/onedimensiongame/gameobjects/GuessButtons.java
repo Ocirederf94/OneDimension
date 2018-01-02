@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.onedimensiongame.utils.CustomKeyboard;
 import com.onedimensiongame.utils.LevelFactory;
-import com.onedimensiongame.utils.LevelsEnum;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -83,7 +82,7 @@ public class GuessButtons extends ImageButton {
         this.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                LevelsEnum levelsEnum;
+                String level;
                 if (buttonId.equals(RETRY)) {
                     guessObject.resetGuessObjectPosition();
                     Gdx.input.setOnscreenKeyboardVisible(false);
@@ -93,9 +92,9 @@ public class GuessButtons extends ImageButton {
                         rightAnswer = true;
                         setTimer();
 
-                        levelsEnum = levelFactory.getRandomLevel();
-                        guessObject.setSolution(levelsEnum.getSolution());
-                        guessObject.setTexture(levelsEnum.getImagePath());
+                        level = levelFactory.getRandomLevel();
+                        guessObject.setTexture(level.substring(0, level.indexOf(" ")));
+                        guessObject.setSolution(level.substring(level.indexOf(" "), level.length()));
 
                     } else {
                         toRender = true;

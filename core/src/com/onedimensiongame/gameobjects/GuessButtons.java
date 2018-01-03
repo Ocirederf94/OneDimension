@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.onedimensiongame.utils.keyboard.CustomKeyboard;
 import com.onedimensiongame.utils.levels.LevelFactory;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,6 +35,7 @@ public class GuessButtons extends ImageButton {
     private boolean toRender = false;
     private boolean rightAnswer = false;
     private Timer timer;
+    private String path;
 
 
     public GuessButtons(GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
@@ -90,10 +92,18 @@ public class GuessButtons extends ImageButton {
                     if (customKeyboard.getGuessString().toUpperCase().equals(guessObject.getSolution())) {
                         toRender = true;
                         rightAnswer = true;
+
+                        if (path != null) try {
+                            levelFactory.removeLevel(path);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
                         setTimer();
 
                         level = levelFactory.getRandomLevel();
-                        guessObject.setTexture(level.substring(0, level.indexOf(" ")));
+                        path = level.substring(0, level.indexOf(" "));
+                        guessObject.setTexture(path);
                         guessObject.setSolution(level.substring(level.indexOf(" ") + 1, level.length()));
 
                     } else {

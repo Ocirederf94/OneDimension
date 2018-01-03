@@ -5,10 +5,15 @@ import com.onedimensiongame.views.MainView;
 
 public class OneDimensionGameMain extends Game {
 	private MainView mainView;
-	
+	private boolean isResume;
+
+	public OneDimensionGameMain(boolean isResume){
+		this.isResume = isResume;
+	}
+
 	@Override
 	public void create () {
-		mainView = new MainView();
+		mainView = new MainView(isResume);
 	}
 
 	@Override

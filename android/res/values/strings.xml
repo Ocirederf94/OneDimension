@@ -4,5 +4,6 @@
     <string name="app_name">OneDimensionGame</string>
     <string name="start">Start</string>
     <string name="exit">Exit</string>
+    <string name="resume">Resume</string>
 
 </resources>

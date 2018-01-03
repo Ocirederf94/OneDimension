@@ -23,6 +23,14 @@
             tools:layout_editor_absoluteY="0dp" />
 
         <Button
+            android:id="@+id/buttonContinue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="handleResumeButton"
+            android:text="@string/resume" />
+
+        <Button
             android:id="@+id/buttonExit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

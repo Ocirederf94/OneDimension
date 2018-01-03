@@ -32,9 +32,9 @@ public class MainView {
     private InputMultiplexer inputMultiplexer;
     private LevelFactory levelFactory;
 
-    public MainView() {
+    public MainView(boolean isResume) {
         guessObject = new GuessObject((Gdx.graphics.getWidth() / 2) - (GUESS_OBJECT_SPRITE_SIZE / 2), (Gdx.graphics.getHeight() - GUESS_OBJECT_SPRITE_SIZE));
-        levelFactory = new LevelFactory();
+        levelFactory = new LevelFactory(isResume);
 
         topBlock = new CoverBlock(0, Math.round((Gdx.graphics.getHeight()/ 2) + (GAP_SIZE / 2)));
         bottomBlock = new CoverBlock(0,0);

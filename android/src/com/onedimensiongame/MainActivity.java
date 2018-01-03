@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends Activity {
+    private static boolean isResume = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +15,14 @@ public class MainActivity extends Activity {
     }
 
     public void handleStartButton(View view) {
+        this.isResume = false;
+        Intent intent = new Intent(this, AndroidLauncher.class);
+        intent.setAction(Intent.ACTION_VIEW);
+        this.startActivity(intent);
+    }
+
+    public void handleResumeButton(View view) {
+        this.isResume = true;
         Intent intent = new Intent(this, AndroidLauncher.class);
         intent.setAction(Intent.ACTION_VIEW);
         this.startActivity(intent);
@@ -21,5 +30,9 @@ public class MainActivity extends Activity {
 
     public void handleExitButton(View view) {
         finish();
+    }
+
+    public static boolean getIsResume(){
+        return isResume;
     }
 }

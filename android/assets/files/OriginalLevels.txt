@@ -1,2 +1,2 @@
 letters/LETTER_A.png A
-buttons/retry_button.png RETRY
+buttons/retry_button.png R

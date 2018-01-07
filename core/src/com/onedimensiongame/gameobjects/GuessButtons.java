@@ -38,8 +38,9 @@ public class GuessButtons extends ImageButton {
     private String path;
 
 
-    public GuessButtons(GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
+    public GuessButtons(boolean isResume, GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(texturePath))));
+        if (isResume) path = guessObject.getPath();
         this.timer = new Timer();
         this.customKeyboard = customKeyboard;
         this.levelFactory = levelFactory;
@@ -125,5 +126,11 @@ public class GuessButtons extends ImageButton {
         }, FEEDBACK_TIME);
     }
 
+    public void setPath(String path) {
+        this.path = path;
+    }
 
+    public void setSolution(String path) {
+        this.path = path;
+    }
 }

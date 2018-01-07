@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.onedimensiongame.utils.levels.LevelFactory;
 
 import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_MOVE_SPEED;
 import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_SPRITE_SIZE;
@@ -15,12 +16,12 @@ import static com.onedimensiongame.utils.GameConstants.LETTER_A;
  */
 
 public class GuessObject extends GameObject {
-    private Texture texture;
-    private String solution;
+    private  static String solution;
+    private static String path;
 
-    public GuessObject(float positionX, float positionY) {
-        super(new Texture(LETTER_A), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
-        this.solution = "A";
+    public GuessObject(boolean isResume, LevelFactory levelFactory, float positionX, float positionY) {
+        super(new Texture(isResume ? subStringToPath(levelFactory.getRandomLevel()) : LETTER_A), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
+        if(!isResume) solution = "A";
     }
 
     @Override
@@ -32,8 +33,12 @@ public class GuessObject extends GameObject {
         return solution;
     }
 
+    public String getPath(){
+        return path;
+    }
+
     public void setSolution(String newSolution){
-        this.solution = newSolution;
+        solution = newSolution;
     }
 
     public void moveGuessObject() {
@@ -58,6 +63,12 @@ public class GuessObject extends GameObject {
 
     private float setInitialY() {
         return (Gdx.graphics.getHeight() - GUESS_OBJECT_SPRITE_SIZE);
+    }
+
+
+    private static String subStringToPath(String completeString){
+        solution = completeString.substring(completeString.indexOf(" ") + 1, completeString.length());
+        return path = completeString.substring(0, completeString.indexOf(" "));
     }
 
 }

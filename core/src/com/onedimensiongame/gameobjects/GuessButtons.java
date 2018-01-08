@@ -36,6 +36,7 @@ public class GuessButtons extends ImageButton {
     private boolean rightAnswer = false;
     private Timer timer;
     private String path;
+    private boolean showSolutionIsComplete = false;
 
 
     public GuessButtons(boolean isResume, GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
@@ -106,6 +107,8 @@ public class GuessButtons extends ImageButton {
                         path = level.substring(0, level.indexOf(" "));
                         guessObject.setTexture(path);
                         guessObject.setSolution(level.substring(level.indexOf(" ") + 1, level.length()));
+                        showSolutionIsComplete = false;
+                        levelFactory.setIsShowSolution(showSolutionIsComplete);
 
                     } else {
                         toRender = true;
@@ -122,6 +125,7 @@ public class GuessButtons extends ImageButton {
             @Override
             public void run() {
                 guessObject.resetGuessObjectPosition();
+                showSolutionIsComplete = true;
             }
         }, FEEDBACK_TIME);
     }

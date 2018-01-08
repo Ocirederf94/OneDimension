@@ -34,6 +34,7 @@ public class LevelFactory {
     private Map<String, String> guessObjectsMap;
     private Preferences prefs;
     private String actualGuessObjectTexturePath;
+    private boolean isShowSolution;
 
     public LevelFactory(boolean isContinue) {
         this.bufferedReader = new BufferedReader(Gdx.files.internal("files/OriginalLevels.txt").reader());
@@ -72,15 +73,15 @@ public class LevelFactory {
     }
 
     public String getRandomLevel() {
-            if (guessObjectsMap.keySet().size() > 0) {
-                Object[] tempArray = guessObjectsMap.keySet().toArray();
-                String key = (String) tempArray[(int) Math.round(Math.random() * (tempArray.length - 1))];
-                actualGuessObjectTexturePath = key;
-                return key + " " + guessObjectsMap.get(key);
-            } else {
-                Gdx.app.exit();
-                return null;
-            }
+        if (guessObjectsMap.keySet().size() > 0) {
+            Object[] tempArray = guessObjectsMap.keySet().toArray();
+            String key = (String) tempArray[(int) Math.round(Math.random() * (tempArray.length - 1))];
+            actualGuessObjectTexturePath = key;
+            return key + " " + guessObjectsMap.get(key);
+        } else {
+            Gdx.app.exit();
+            return null;
+        }
 
     }
 
@@ -90,18 +91,27 @@ public class LevelFactory {
         prefs.flush();
     }
 
-    public String getActualGuessObjectTexturePath(){
+    public String getActualGuessObjectTexturePath() {
         return this.actualGuessObjectTexturePath;
     }
 
+    public boolean getIsShowSolution() {
+        return isShowSolution;
+    }
+
+    public void setIsShowSolution(boolean isShowSolution) {
+        this.isShowSolution = isShowSolution;
+    }
 
     private void setGuessObjectsMap(boolean isContinue) {
-        if (!isContinue){
-            this.guessObjectsMap =   new HashMap<String, String>();
+        if (!isContinue) {
+            isShowSolution = true;
+            this.guessObjectsMap = new HashMap<String, String>();
             prefs.clear();
             getLevelsFromFile();
-        }else {
+        } else {
             this.guessObjectsMap = (Map<String, String>) prefs.get();
+            isShowSolution = false;
         }
     }
 

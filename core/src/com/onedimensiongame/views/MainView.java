@@ -36,8 +36,8 @@ public class MainView {
         levelFactory = new LevelFactory(isResume);
         guessObject = new GuessObject(isResume, levelFactory, (Gdx.graphics.getWidth() / 2) - (GUESS_OBJECT_SPRITE_SIZE / 2), (Gdx.graphics.getHeight() - GUESS_OBJECT_SPRITE_SIZE));
 
-        topBlock = new CoverBlock(0, Math.round((Gdx.graphics.getHeight() / 2) + (GAP_SIZE / 2)));
-        bottomBlock = new CoverBlock(0, 0);
+        topBlock = new CoverBlock(levelFactory, 0, Math.round((Gdx.graphics.getHeight() / 2) + (GAP_SIZE / 2)));
+        bottomBlock = new CoverBlock(levelFactory, 0, 0);
 
         customKeyboard = new CustomKeyboard(guessObject);
 

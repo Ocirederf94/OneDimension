@@ -22,9 +22,9 @@ public class CoverBlock extends GameObject {
     }
 
     @Override
-    public void drawSprite(Sprite sprite,SpriteBatch spriteBatch) {
-        float opacity = levelFactory.getIsShowSolution()? 0.5f: 999999999f;
-       sprite.draw(spriteBatch, opacity);
+    public void drawSprite(Sprite sprite, SpriteBatch spriteBatch) {
+        float opacity = levelFactory.getIsShowSolution() ? 0.5f : levelFactory.getIsFirstLevel() ? 0.5f : 999999999f;
+        sprite.draw(spriteBatch, opacity);
     }
 
 }

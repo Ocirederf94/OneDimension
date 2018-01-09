@@ -66,6 +66,6 @@ public class GameConstants {
     public static final float GUESS_BUTTON_SIZE = 200f;
     public static final float GUESS_OBJECT_MOVE_SPEED = 2f;
 
-    public static final long FEEDBACK_TIME = 2000;
+    public static final long FEEDBACK_TIME = 3000;
 
 }

@@ -16,12 +16,12 @@ import static com.onedimensiongame.utils.GameConstants.LETTER_A;
  */
 
 public class GuessObject extends GameObject {
-    private  static String solution;
+    private static String solution;
     private static String path;
 
     public GuessObject(boolean isResume, LevelFactory levelFactory, float positionX, float positionY) {
         super(new Texture(isResume ? subStringToPath(levelFactory.getRandomLevel()) : LETTER_A), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
-        if(!isResume) solution = "A";
+        if (!isResume) solution = "A";
     }
 
     @Override
@@ -29,27 +29,28 @@ public class GuessObject extends GameObject {
         this.sprite.draw(spriteBatch);
     }
 
-    public String getSolution(){
+    public String getSolution() {
         return solution;
     }
 
-    public String getPath(){
+    public String getPath() {
         return path;
     }
 
-    public void setSolution(String newSolution){
+    public void setSolution(String newSolution) {
         solution = newSolution;
     }
 
     public void moveGuessObject() {
-        this.sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
+        if (this.sprite.getY() > 0) this.sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
+
     }
 
-    public Sprite getSprite(){
+    public Sprite getSprite() {
         return sprite;
     }
 
-    public void setTexture(String path){
+    public void setTexture(String path) {
         this.sprite.setTexture(new Texture(path));
     }
 
@@ -66,7 +67,7 @@ public class GuessObject extends GameObject {
     }
 
 
-    private static String subStringToPath(String completeString){
+    private static String subStringToPath(String completeString) {
         solution = completeString.substring(completeString.indexOf(" ") + 1, completeString.length());
         return path = completeString.substring(0, completeString.indexOf(" "));
     }

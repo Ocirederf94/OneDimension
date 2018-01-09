@@ -25,8 +25,7 @@ import static com.onedimensiongame.utils.GameConstants.WRONG_FEEDBACK;
 
 public class LevelFactory {
     private Random rand;
-    private Texture levelCleared;
-    private Texture levelFailed;
+    private Texture levelCleared, levelFailed;
     private SpriteBatch spriteBatch;
     private Sprite sprite;
     private Timer timer;
@@ -34,7 +33,7 @@ public class LevelFactory {
     private Map<String, String> guessObjectsMap;
     private Preferences prefs;
     private String actualGuessObjectTexturePath;
-    private boolean isShowSolution;
+    private boolean isShowSolution, isFirstLevel = true;
 
     public LevelFactory(boolean isContinue) {
         this.bufferedReader = new BufferedReader(Gdx.files.internal("files/OriginalLevels.txt").reader());
@@ -73,6 +72,8 @@ public class LevelFactory {
     }
 
     public String getRandomLevel() {
+        this.isFirstLevel = false;
+
         if (guessObjectsMap.keySet().size() > 0) {
             Object[] tempArray = guessObjectsMap.keySet().toArray();
             String key = (String) tempArray[(int) Math.round(Math.random() * (tempArray.length - 1))];
@@ -105,13 +106,11 @@ public class LevelFactory {
 
     private void setGuessObjectsMap(boolean isContinue) {
         if (!isContinue) {
-            isShowSolution = true;
             this.guessObjectsMap = new HashMap<String, String>();
             prefs.clear();
             getLevelsFromFile();
         } else {
             this.guessObjectsMap = (Map<String, String>) prefs.get();
-            isShowSolution = false;
         }
     }
 
@@ -130,5 +129,9 @@ public class LevelFactory {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean getIsFirstLevel() {
+        return isFirstLevel;
     }
 }

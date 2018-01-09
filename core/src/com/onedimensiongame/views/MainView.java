@@ -39,7 +39,7 @@ public class MainView {
         topBlock = new CoverBlock(levelFactory, 0, Math.round((Gdx.graphics.getHeight() / 2) + (GAP_SIZE / 2)));
         bottomBlock = new CoverBlock(levelFactory, 0, 0);
 
-        customKeyboard = new CustomKeyboard(guessObject);
+        customKeyboard = new CustomKeyboard(guessObject, levelFactory);
 
         retryButton = new GuessButtons(isResume, guessObject, levelFactory, RETRY, RETRY_BUTTON, 0, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);
         submitButton = new GuessButtons(isResume, guessObject, levelFactory, SUBMIT, SUBMIT_BUTTON, Gdx.graphics.getWidth() - GUESS_BUTTON_SIZE, Gdx.graphics.getHeight() - GUESS_BUTTON_SIZE, customKeyboard);

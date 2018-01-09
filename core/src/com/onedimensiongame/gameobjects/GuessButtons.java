@@ -37,6 +37,7 @@ public class GuessButtons extends ImageButton {
     private Timer timer;
     private String path;
     private boolean showSolutionIsComplete = false;
+    private String level;
 
 
     public GuessButtons(boolean isResume, GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
@@ -86,7 +87,6 @@ public class GuessButtons extends ImageButton {
         this.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                String level;
                 if (buttonId.equals(RETRY)) {
                     guessObject.resetGuessObjectPosition();
                     Gdx.input.setOnscreenKeyboardVisible(false);
@@ -94,6 +94,8 @@ public class GuessButtons extends ImageButton {
                     if (customKeyboard.getGuessString().toUpperCase().equals(guessObject.getSolution())) {
                         toRender = true;
                         rightAnswer = true;
+                        levelFactory.setIsShowSolution(true);
+                        guessObject.resetGuessObjectPosition();
 
                         if (path != null) try {
                             levelFactory.removeLevel(path);
@@ -101,16 +103,11 @@ public class GuessButtons extends ImageButton {
                             e.printStackTrace();
                         }
 
+
                         setTimer();
 
-                        level = levelFactory.getRandomLevel();
-                        path = level.substring(0, level.indexOf(" "));
-                        guessObject.setTexture(path);
-                        guessObject.setSolution(level.substring(level.indexOf(" ") + 1, level.length()));
-                        showSolutionIsComplete = false;
-                        levelFactory.setIsShowSolution(showSolutionIsComplete);
-
                     } else {
+                        levelFactory.setIsShowSolution(false);
                         toRender = true;
                         rightAnswer = false;
                         setTimer();
@@ -124,8 +121,17 @@ public class GuessButtons extends ImageButton {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                guessObject.resetGuessObjectPosition();
-                showSolutionIsComplete = true;
+                if (rightAnswer) {
+                    level = levelFactory.getRandomLevel();
+                    path = level.substring(0, level.indexOf(" "));
+                    guessObject.setTexture(path);
+                    guessObject.setSolution(level.substring(level.indexOf(" ") + 1, level.length()));
+                    levelFactory.setIsShowSolution(false);
+                    guessObject.resetGuessObjectPosition();
+                }
+                else {
+                    guessObject.resetGuessObjectPosition();
+                }
             }
         }, FEEDBACK_TIME);
     }

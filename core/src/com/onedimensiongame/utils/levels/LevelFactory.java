@@ -32,7 +32,6 @@ public class LevelFactory {
     private BufferedReader bufferedReader;
     private Map<String, String> guessObjectsMap;
     private Preferences prefs;
-    private String actualGuessObjectTexturePath;
     private boolean isShowSolution, isFirstLevel = true;
 
     public LevelFactory(boolean isContinue) {
@@ -77,10 +76,14 @@ public class LevelFactory {
         if (guessObjectsMap.keySet().size() > 0) {
             Object[] tempArray = guessObjectsMap.keySet().toArray();
             String key = (String) tempArray[(int) Math.round(Math.random() * (tempArray.length - 1))];
-            actualGuessObjectTexturePath = key;
             return key + " " + guessObjectsMap.get(key);
         } else {
-            Gdx.app.exit();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Gdx.app.exit();
+                }
+            }, FEEDBACK_TIME);
             return null;
         }
 
@@ -90,10 +93,6 @@ public class LevelFactory {
         guessObjectsMap.remove(key);
         prefs.remove(key);
         prefs.flush();
-    }
-
-    public String getActualGuessObjectTexturePath() {
-        return this.actualGuessObjectTexturePath;
     }
 
     public boolean getIsShowSolution() {

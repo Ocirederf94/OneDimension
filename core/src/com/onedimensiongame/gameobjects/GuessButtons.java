@@ -13,10 +13,7 @@ import com.onedimensiongame.utils.keyboard.CustomKeyboard;
 import com.onedimensiongame.utils.levels.LevelFactory;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import static com.onedimensiongame.utils.GameConstants.FEEDBACK_TIME;
 import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;
 import static com.onedimensiongame.utils.GameConstants.RETRY;
 import static com.onedimensiongame.utils.GameConstants.SUBMIT;
@@ -34,16 +31,13 @@ public class GuessButtons extends ImageButton {
     private LevelFactory levelFactory;
     private boolean toRender = false;
     private boolean rightAnswer = false;
-    private Timer timer;
     private String path;
-    private boolean showSolutionIsComplete = false;
     private String level;
 
 
     public GuessButtons(boolean isResume, GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(texturePath))));
         if (isResume) path = guessObject.getPath();
-        this.timer = new Timer();
         this.customKeyboard = customKeyboard;
         this.levelFactory = levelFactory;
         this.buttonId = buttonId;
@@ -94,53 +88,28 @@ public class GuessButtons extends ImageButton {
                     if (customKeyboard.getGuessString().toUpperCase().equals(guessObject.getSolution())) {
                         toRender = true;
                         rightAnswer = true;
-                        levelFactory.setIsShowSolution(true);
                         guessObject.resetGuessObjectPosition();
+
+                        levelFactory.setIsShowSolution(true);
+                        level = levelFactory.getRandomLevel();
+                        path = level.substring(0, level.indexOf(" "));
+                        guessObject.setPreTexture(path);
+                        guessObject.setPreSolution(level.substring(level.indexOf(" ") + 1, level.length()));
 
                         if (path != null) try {
                             levelFactory.removeLevel(path);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
-
-                        setTimer();
-
                     } else {
                         levelFactory.setIsShowSolution(false);
                         toRender = true;
                         rightAnswer = false;
-                        setTimer();
+                        guessObject.resetGuessObjectPosition();
                     }
                 }
             }
         });
     }
 
-    private void setTimer() {
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (rightAnswer) {
-                    level = levelFactory.getRandomLevel();
-                    path = level.substring(0, level.indexOf(" "));
-                    guessObject.setTexture(path);
-                    guessObject.setSolution(level.substring(level.indexOf(" ") + 1, level.length()));
-                    levelFactory.setIsShowSolution(false);
-                    guessObject.resetGuessObjectPosition();
-                }
-                else {
-                    guessObject.resetGuessObjectPosition();
-                }
-            }
-        }, FEEDBACK_TIME);
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public void setSolution(String path) {
-        this.path = path;
-    }
 }

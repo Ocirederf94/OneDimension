@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
     private static boolean isResume = false;
@@ -12,6 +13,12 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Button resumeButton =  findViewById(R.id.buttonContinue);
+        //TODO page needs to refresh when goign back
+/*        resumeButton.setEnabled(false);
+        if (Gdx.app != null){
+            if (!Gdx.app.getPreferences("ContinueLevels").get().isEmpty()) resumeButton.setEnabled(true);
+        }*/
     }
 
     public void handleStartButton(View view) {

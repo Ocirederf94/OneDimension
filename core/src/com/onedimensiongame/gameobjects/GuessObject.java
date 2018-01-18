@@ -40,9 +40,10 @@ public class GuessObject extends GameObject {
 
 
     public void moveGuessObject() {
-        if (levelFactory.getIsShowSolution()){
-            if (this.sprite.getY() > 1) this.sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
-            else {
+        if (levelFactory.getIsShowSolution()) {
+            if (this.sprite.getY() > 1) {
+                this.sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);
+            } else {
                 setSolution();
                 setTexture();
                 resetGuessObjectPosition();

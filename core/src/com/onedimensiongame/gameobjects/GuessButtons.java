@@ -86,6 +86,13 @@ public class GuessButtons extends ImageButton {
                     Gdx.input.setOnscreenKeyboardVisible(false);
                 } else if (buttonId.equals(SUBMIT)) {
                     if (customKeyboard.getGuessString().toUpperCase().equals(guessObject.getSolution())) {
+                        if (path != null)
+                            try {
+                                levelFactory.removeLevel(path);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
                         toRender = true;
                         rightAnswer = true;
                         guessObject.resetGuessObjectPosition();
@@ -95,12 +102,6 @@ public class GuessButtons extends ImageButton {
                         path = level.substring(0, level.indexOf(" "));
                         guessObject.setPreTexture(path);
                         guessObject.setPreSolution(level.substring(level.indexOf(" ") + 1, level.length()));
-
-                        if (path != null) try {
-                            levelFactory.removeLevel(path);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                     } else {
                         levelFactory.setIsShowSolution(false);
                         toRender = true;

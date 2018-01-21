@@ -51,6 +51,8 @@ public class LevelFactory {
         this.sprite.setPosition(Gdx.graphics.getWidth() - (levelCleared.getWidth() / 2), Gdx.graphics.getHeight() - (levelCleared.getHeight() / 2));
     }
 
+
+    //TODO Fabian say he doesn´t want feedback... lets see what we do about it
     public void renderLevelFeedBack(final GuessButtons guessButton) {
         if (guessButton.getToRender()) {
             sprite.setTexture(guessButton.getRightAnswer() ? levelCleared : levelFailed);

@@ -6,19 +6,27 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.badlogic.gdx.Gdx;
+
 public class MainActivity extends Activity {
     private static boolean isResume = false;
+    private Button resumeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button resumeButton =  findViewById(R.id.buttonContinue);
-        //TODO page needs to refresh when goign back
-/*        resumeButton.setEnabled(false);
-        if (Gdx.app != null){
-            if (!Gdx.app.getPreferences("ContinueLevels").get().isEmpty()) resumeButton.setEnabled(true);
-        }*/
+        resumeButton = findViewById(R.id.buttonContinue);
+        resumeButton.setEnabled(false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (Gdx.app != null) {
+            if (!Gdx.app.getPreferences("ContinueLevels").get().isEmpty())
+                resumeButton.setEnabled(true);
+        }
     }
 
     public void handleStartButton(View view) {
@@ -39,7 +47,8 @@ public class MainActivity extends Activity {
         finish();
     }
 
-    public static boolean getIsResume(){
+    public static boolean getIsResume() {
         return isResume;
     }
+
 }

@@ -33,6 +33,7 @@ public class LevelFactory {
     private Map<String, String> guessObjectsMap;
     private Preferences prefs;
     private boolean isShowSolution, isFirstLevel = true;
+    private boolean isLastLevel = false;
 
     public LevelFactory(boolean isContinue) {
         this.bufferedReader = new BufferedReader(Gdx.files.internal("files/OriginalLevels.txt").reader());
@@ -79,22 +80,15 @@ public class LevelFactory {
             Object[] tempArray = guessObjectsMap.keySet().toArray();
             String key = (String) tempArray[(int) Math.round(Math.random() * (tempArray.length - 1))];
             return key + " " + guessObjectsMap.get(key);
-        } else {
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Gdx.app.exit();
-                }
-            }, FEEDBACK_TIME);
-            return null;
         }
-
+        return null;
     }
 
     public void removeLevel(String key) throws IOException {
         guessObjectsMap.remove(key);
         prefs.remove(key);
         prefs.flush();
+        isLastLevel = prefs.get().isEmpty();
     }
 
     public boolean getIsShowSolution() {
@@ -134,5 +128,9 @@ public class LevelFactory {
 
     public boolean getIsFirstLevel() {
         return isFirstLevel;
+    }
+
+    public boolean getIsLastLevel() {
+        return isLastLevel;
     }
 }

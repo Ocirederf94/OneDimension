@@ -98,10 +98,12 @@ public class GuessButtons extends ImageButton {
                         guessObject.resetGuessObjectPosition();
 
                         levelFactory.setIsShowSolution(true);
-                        level = levelFactory.getRandomLevel();
-                        path = level.substring(0, level.indexOf(" "));
-                        guessObject.setPreTexture(path);
-                        guessObject.setPreSolution(level.substring(level.indexOf(" ") + 1, level.length()));
+                        if (!levelFactory.getIsLastLevel()) {
+                            level = levelFactory.getRandomLevel();
+                            path = level.substring(0, level.indexOf(" "));
+                            guessObject.setPreTexture(path);
+                            guessObject.setPreSolution(level.substring(level.indexOf(" ") + 1, level.length()));
+                        }
                     } else {
                         levelFactory.setIsShowSolution(false);
                         toRender = true;

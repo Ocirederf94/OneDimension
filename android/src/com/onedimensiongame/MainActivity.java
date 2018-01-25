@@ -17,16 +17,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         resumeButton = findViewById(R.id.buttonContinue);
-        resumeButton.setEnabled(false);
+        setResumeButton();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (Gdx.app != null) {
-            if (!Gdx.app.getPreferences("ContinueLevels").get().isEmpty())
-                resumeButton.setEnabled(true);
-        }
+        setResumeButton();
     }
 
     public void handleStartButton(View view) {
@@ -49,6 +46,14 @@ public class MainActivity extends Activity {
 
     public static boolean getIsResume() {
         return isResume;
+    }
+
+    private void setResumeButton(){
+        resumeButton.setEnabled(false);
+        if (Gdx.app != null) {
+            if (!Gdx.app.getPreferences("ContinueLevels").get().isEmpty())
+                resumeButton.setEnabled(true);
+        }
     }
 
 }

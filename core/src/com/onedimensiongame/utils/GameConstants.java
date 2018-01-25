@@ -64,7 +64,7 @@ public class GameConstants {
     public static final float GAP_SIZE = 100f;
     public static final float KEYS_SIZE = 380f;
     public static final float GUESS_BUTTON_SIZE = 200f;
-    public static final float GUESS_OBJECT_MOVE_SPEED = 1.5f;
+    public static final float GUESS_OBJECT_MOVE_SPEED = 3.5f;
 
     public static final long FEEDBACK_TIME = 3000;
 

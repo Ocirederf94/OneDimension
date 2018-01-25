@@ -48,6 +48,7 @@ public class GuessObject extends GameObject {
                 setTexture();
                 resetGuessObjectPosition();
                 levelFactory.setIsShowSolution(false);
+                if (levelFactory.getIsLastLevel()) Gdx.app.exit();
             }
         }
         if (this.sprite.getY() > 0) this.sprite.translateY(-GUESS_OBJECT_MOVE_SPEED);

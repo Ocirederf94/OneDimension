@@ -8,7 +8,7 @@ import com.onedimensiongame.utils.levels.LevelFactory;
 
 import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_MOVE_SPEED;
 import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_SPRITE_SIZE;
-import static com.onedimensiongame.utils.GameConstants.LETTER_A;
+
 
 
 /**
@@ -16,12 +16,12 @@ import static com.onedimensiongame.utils.GameConstants.LETTER_A;
  */
 
 public class GuessObject extends GameObject {
-    private static String solution, path, preTexture, preSolution, oldTextur;
+    private static String solution, preTexture, preSolution, oldTextur;
     private LevelFactory levelFactory;
 
-    public GuessObject(boolean isResume, LevelFactory levelFactory, float positionX, float positionY) {
-        super(new Texture(isResume ? subStringToPath(levelFactory.getRandomLevel()) : LETTER_A), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
-        if (!isResume) solution = "A";
+    public GuessObject(LevelFactory levelFactory, float positionX, float positionY) {
+        super(new Texture(levelFactory.getNextLevel().getImagePath()), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
+        //if (!isResume) solution = "T";
         this.levelFactory = levelFactory;
     }
 
@@ -33,11 +33,6 @@ public class GuessObject extends GameObject {
     public String getSolution() {
         return solution;
     }
-
-    public String getPath() {
-        return path;
-    }
-
 
     public void moveGuessObject() {
         if (levelFactory.getIsShowSolution()) {
@@ -89,8 +84,4 @@ public class GuessObject extends GameObject {
     }
 
 
-    private static String subStringToPath(String completeString) {
-        solution = completeString.substring(completeString.indexOf(" ") + 1, completeString.length());
-        return path = completeString.substring(0, completeString.indexOf(" "));
-    }
 }

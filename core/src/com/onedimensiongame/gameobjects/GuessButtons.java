@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.onedimensiongame.utils.keyboard.CustomKeyboard;
 import com.onedimensiongame.utils.levels.LevelFactory;
+import com.onedimensiongame.utils.levels.LevelsEnum;
 
 import java.io.IOException;
 
@@ -31,13 +32,12 @@ public class GuessButtons extends ImageButton {
     private LevelFactory levelFactory;
     private boolean toRender = false;
     private boolean rightAnswer = false;
-    private String path;
-    private String level;
+    private LevelsEnum level;
 
 
-    public GuessButtons(boolean isResume, GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
+    public GuessButtons(GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(texturePath))));
-        if (isResume) path = guessObject.getPath();
+
         this.customKeyboard = customKeyboard;
         this.levelFactory = levelFactory;
         this.buttonId = buttonId;
@@ -86,12 +86,6 @@ public class GuessButtons extends ImageButton {
                     Gdx.input.setOnscreenKeyboardVisible(false);
                 } else if (buttonId.equals(SUBMIT)) {
                     if (customKeyboard.getGuessString().toUpperCase().equals(guessObject.getSolution())) {
-                        if (path != null)
-                            try {
-                                levelFactory.removeLevel(path);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
 
                         toRender = true;
                         rightAnswer = true;
@@ -99,10 +93,9 @@ public class GuessButtons extends ImageButton {
 
                         levelFactory.setIsShowSolution(true);
                         if (!levelFactory.getIsLastLevel()) {
-                            level = levelFactory.getRandomLevel();
-                            path = level.substring(0, level.indexOf(" "));
-                            guessObject.setPreTexture(path);
-                            guessObject.setPreSolution(level.substring(level.indexOf(" ") + 1, level.length()));
+                            level = levelFactory.getNextLevel();
+                            guessObject.setPreTexture(level.getImagePath());
+                            guessObject.setPreSolution(level.getSolution());
                         }
                     } else {
                         levelFactory.setIsShowSolution(false);

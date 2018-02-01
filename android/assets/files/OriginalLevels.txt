@@ -1,2 +1,10 @@
-buttons/submit_button.png S
-buttons/retry_button.png R
+letters/uno.png;T
+letters/dos.png;V
+letters/tres.png;A
+letters/cuatro.png;2
+letters/cinco.png;?
+letters/seis.png;TRIANGULO
+letters/siete.png;GARFO
+letters/ocho.png;ESTRELA
+letters/nueve.png;CORAZON
+letters/diez.png;FIN

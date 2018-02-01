@@ -1,28 +1,25 @@
 package com.onedimensiongame.utils.levels;
 
-import static com.onedimensiongame.utils.GameConstants.LETTER_A;
-import static com.onedimensiongame.utils.GameConstants.RETRY_BUTTON;
-
 /**
  * Created by fredy on 30/12/2017.
  */
 
-public enum LevelsEnum {
-    WORD_A(LETTER_A, "A"),
-    WORD_RETRY(RETRY_BUTTON, "RETRY");
+public class LevelsEnum {
 
     private String imagePath;
     private String solution;
+    private int num;
 
-    LevelsEnum(String imagePath, String solution){
+    LevelsEnum(String imagePath, String solution, int num){
         this.imagePath = imagePath;
         this.solution = solution;
+        this.num=num;
     }
 
     public String getImagePath() {
         return imagePath;
     }
-
+    public int getNumber(){ return num;}
     public String getSolution() {
         return solution;
     }

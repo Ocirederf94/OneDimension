@@ -6,7 +6,9 @@ package com.onedimensiongame.utils;
 
 public class GameConstants {
 
-    public static final String LETTER_A = "letters/LETTER_A.png";
+
+
+
     public static final String A_KEY="keys/a.png";
     public static final String B_KEY="keys/b.png";
     public static final String C_KEY="keys/c.png";
@@ -61,10 +63,10 @@ public class GameConstants {
     public static final String RETRY = "RETRY";
 
     public static final float GUESS_OBJECT_SPRITE_SIZE = 500f;
-    public static final float GAP_SIZE = 100f;
+    public static final float GAP_SIZE = 10f;
     public static final float KEYS_SIZE = 380f;
     public static final float GUESS_BUTTON_SIZE = 200f;
-    public static final float GUESS_OBJECT_MOVE_SPEED = 3.5f;
+    public static final float GUESS_OBJECT_MOVE_SPEED = 3f;
 
     public static final long FEEDBACK_TIME = 3000;
 

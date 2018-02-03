@@ -10,16 +10,20 @@ public class LevelsEnum {
     private String solution;
     private int num;
 
-    LevelsEnum(String imagePath, String solution, int num){
+    LevelsEnum(String imagePath, String solution, int num) {
         this.imagePath = imagePath;
         this.solution = solution;
-        this.num=num;
+        this.num = num;
     }
 
     public String getImagePath() {
         return imagePath;
     }
-    public int getNumber(){ return num;}
+
+    public int getNumber() {
+        return num;
+    }
+
     public String getSolution() {
         return solution;
     }

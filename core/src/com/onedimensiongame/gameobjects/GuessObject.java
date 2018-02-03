@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.onedimensiongame.utils.levels.LevelFactory;
+import com.onedimensiongame.utils.levels.LevelsEnum;
 
 import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_MOVE_SPEED;
 import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_SPRITE_SIZE;
@@ -18,10 +19,11 @@ import static com.onedimensiongame.utils.GameConstants.GUESS_OBJECT_SPRITE_SIZE;
 public class GuessObject extends GameObject {
     private static String solution, preTexture, preSolution, oldTextur;
     private LevelFactory levelFactory;
+    private static LevelsEnum levelsEnum;
 
     public GuessObject(LevelFactory levelFactory, float positionX, float positionY) {
-        super(new Texture(levelFactory.getNextLevel().getImagePath()), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
-        //if (!isResume) solution = "T";
+        super(new Texture((levelsEnum = levelFactory.getNextLevel()).getImagePath()), positionX, positionY, GUESS_OBJECT_SPRITE_SIZE, GUESS_OBJECT_SPRITE_SIZE);
+        this.solution =  levelsEnum.getSolution();
         this.levelFactory = levelFactory;
     }
 

@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -31,15 +30,15 @@ public class LevelFactory {
     private Sprite sprite;
     private Timer timer;
     private List<Map> guessObjectsMapList;
-    private Map<String,Integer> dataContainer;
+    private Map<String, Integer> dataContainer;
     private boolean isShowSolution;
     private boolean isLastLevel = false;
-    private boolean isFirstLevel=true;
+    private boolean isFirstLevel = true;
     private Integer currentLevel;
 
-    public LevelFactory(Map<String,Integer> dataContainer) {
-        this.dataContainer=dataContainer;
-        currentLevel=dataContainer.get("current_level");
+    public LevelFactory(Map<String, Integer> dataContainer) {
+        this.dataContainer = dataContainer;
+        currentLevel = dataContainer.get("current_level");
         initializeGuessObjectsMap();
 
         this.timer = new Timer();
@@ -76,10 +75,10 @@ public class LevelFactory {
 
     public LevelsEnum getNextLevel() {
         this.isFirstLevel = currentLevel.equals(0);
-        dataContainer.put("current_level",currentLevel);
-        String x= (String) guessObjectsMapList.get(currentLevel).keySet().iterator().next();
-        String y= (String) guessObjectsMapList.get(currentLevel).get(x);
-        return new LevelsEnum(x,y, currentLevel++);
+        dataContainer.put("current_level", currentLevel);
+        String path = (String) guessObjectsMapList.get(currentLevel).keySet().iterator().next();
+        String solution = (String) guessObjectsMapList.get(currentLevel).get(path);
+        return new LevelsEnum(path, solution, currentLevel++);
     }
 
     public boolean getIsShowSolution() {
@@ -91,23 +90,24 @@ public class LevelFactory {
     }
 
     private void initializeGuessObjectsMap() {
-            this.guessObjectsMapList = new ArrayList<Map>();
-            getLevelsFromFile();
+        this.guessObjectsMapList = new ArrayList<Map>();
+        getLevelsFromFile();
     }
 
     private void getLevelsFromFile() {
         String line;
         BufferedReader bufferedReader = new BufferedReader(Gdx.files.internal("files/OriginalLevels.txt").reader());
-        try{
-        while ((line=bufferedReader.readLine())!=null) {
-            String [] tempString = line.split(";");
-            Map element = new HashMap<String,String>();
-            element.put(tempString[0],tempString[1]);
-            guessObjectsMapList.add(element);
-        }
+        try {
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] tempString = line.split(";");
+                Map element = new HashMap<String, String>();
+                element.put(tempString[0], tempString[1]);
+                guessObjectsMapList.add(element);
+            }
             bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch(IOException e){e.printStackTrace();}
     }
 
     public boolean isFirstLevel() {

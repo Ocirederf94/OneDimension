@@ -1,6 +1,7 @@
 package com.onedimensiongame;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,13 +20,15 @@ public class MainActivity extends Activity {
     private Button resumeButton;
     private static Map<String, Integer> dataContainer = new HashMap<>(1);
     private SaveStateService saveStateService;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        saveStateService = SaveStateService.getInstance();
-        dataContainer.put(CURRENT_LEVEL, saveStateService.getLevel(this.getBaseContext()));
+        context = this.getBaseContext();
+        saveStateService = SaveStateService.getInstance(context);
+        dataContainer.put(CURRENT_LEVEL, saveStateService.getLevel(context));
         resumeButton = findViewById(R.id.buttonContinue);
         setResumeButton();
     }
@@ -67,7 +70,7 @@ public class MainActivity extends Activity {
     }
 
     private void saveLevel() {
-        saveStateService.setLevel(dataContainer.get(CURRENT_LEVEL), this.getBaseContext());
+        saveStateService.setLevel(String.valueOf(dataContainer.get(CURRENT_LEVEL)), context);
     }
 
     public static class AndroidLauncher extends AndroidApplication {

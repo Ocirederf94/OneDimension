@@ -13,8 +13,6 @@ import com.onedimensiongame.utils.keyboard.CustomKeyboard;
 import com.onedimensiongame.utils.levels.LevelFactory;
 import com.onedimensiongame.utils.levels.LevelsEnum;
 
-import java.io.IOException;
-
 import static com.onedimensiongame.utils.GameConstants.GUESS_BUTTON_SIZE;
 import static com.onedimensiongame.utils.GameConstants.RETRY;
 import static com.onedimensiongame.utils.GameConstants.SUBMIT;
@@ -37,7 +35,6 @@ public class GuessButtons extends ImageButton {
 
     public GuessButtons(GuessObject guessObject, LevelFactory levelFactory, String buttonId, String texturePath, float x, float y, CustomKeyboard customKeyboard) {
         super(new TextureRegionDrawable(new TextureRegion(new Texture(texturePath))));
-
         this.customKeyboard = customKeyboard;
         this.levelFactory = levelFactory;
         this.buttonId = buttonId;
@@ -54,7 +51,8 @@ public class GuessButtons extends ImageButton {
     }
 
     public void renderButton() {
-        stage.draw();
+        if (buttonId.equals(RETRY)) stage.draw();
+        else if (!customKeyboard.getGuessString().isEmpty()) stage.draw();
     }
 
     public InputProcessor getInputProcessor() {
@@ -84,7 +82,7 @@ public class GuessButtons extends ImageButton {
                 if (buttonId.equals(RETRY)) {
                     guessObject.resetGuessObjectPosition();
                     Gdx.input.setOnscreenKeyboardVisible(false);
-                } else if (buttonId.equals(SUBMIT)) {
+                } else if (buttonId.equals(SUBMIT) && !customKeyboard.getGuessString().isEmpty()) {
                     if (customKeyboard.getGuessString().toUpperCase().equals(guessObject.getSolution())) {
 
                         toRender = true;

@@ -100,7 +100,7 @@ public class LevelFactory {
         try {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] tempString = line.split(";");
-                Map element = new HashMap<String, String>();
+                Map<String, String> element = new HashMap<String, String>();
                 element.put(tempString[0], tempString[1]);
                 guessObjectsMapList.add(element);
             }

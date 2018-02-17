@@ -46,6 +46,12 @@ public class MainActivity extends Activity {
         saveLevel();
     }
 
+    @Override
+    protected void onDestroy() {
+        saveLevel();
+        super.onDestroy();
+    }
+
     public void handleStartButton(View view) {
         dataContainer.put(CURRENT_LEVEL, 0);
         handleButton();

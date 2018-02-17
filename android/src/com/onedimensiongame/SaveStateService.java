@@ -22,12 +22,6 @@ public final class SaveStateService {
     }
 
     public static SaveStateService getInstance(Context context) {
-      /*  if (context.getFileStreamPath(FILE_NAME) != null) {
-            file = context.getFileStreamPath(FILE_NAME);
-        } else {
-            file = new File(context.getFilesDir(), FILE_NAME);
-        }*/
-
         return serviceInstance;
     }
 

@@ -110,7 +110,7 @@ public class LevelFactory {
         }
     }
 
-    public boolean isFirstLevel() {
+    public boolean getIsFirstLevel() {
         return isFirstLevel;
     }
 

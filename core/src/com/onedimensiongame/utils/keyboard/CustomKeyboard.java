@@ -16,6 +16,7 @@ import com.onedimensiongame.gameobjects.GuessObject;
 import com.onedimensiongame.utils.levels.LevelFactory;
 
 import static com.onedimensiongame.utils.GameConstants.DELETE;
+import static com.onedimensiongame.utils.GameConstants.EXPERIMENTAL_KEY;
 import static com.onedimensiongame.utils.GameConstants.SUBMIT;
 
 /**
@@ -25,18 +26,18 @@ import static com.onedimensiongame.utils.GameConstants.SUBMIT;
 public class CustomKeyboard {
     private BitmapFont bitmapFont;
     private float keysWidht, keysHeight;
-    private int counter = 0;
     private Stage stage;
     private InputProcessor inputProcessor;
     private SpriteBatch spriteBatch;
     private String guessString = "";
     private GuessObject guessObject;
     private LevelFactory levelFactory;
+    private float counter = 0;
 
     public CustomKeyboard(GuessObject guessObject, LevelFactory levelFactory) {
         this.guessObject = guessObject;
         this.keysWidht = (Gdx.graphics.getWidth() / 10);
-        this.keysHeight = ((Gdx.graphics.getHeight() / 3) / 4);
+        this.keysHeight = (((Gdx.graphics.getHeight() / 2) / 2) / 4);
         this.stage = new Stage();
         this.inputProcessor = stage;
         this.levelFactory = levelFactory;
@@ -50,11 +51,10 @@ public class CustomKeyboard {
     }
 
     public void renderKeyboard() {
-        if (guessObject.getSprite().getY() < (Gdx.graphics.getHeight() / 4) && !levelFactory.getIsShowSolution()){
+        if (guessObject.getSprite().getY() < (Gdx.graphics.getHeight() / 4) && !levelFactory.getIsShowSolution()) {
             stage.draw();
             createTextField(counter);
-        }
-        else {
+        } else {
             guessString = "";
         }
     }
@@ -67,7 +67,8 @@ public class CustomKeyboard {
         return inputProcessor;
     }
 
-    public String getGuessString(){
+
+    public String getGuessString() {
         return guessString;
     }
 
@@ -75,38 +76,37 @@ public class CustomKeyboard {
         KeyboardKeysEnum[] keysArray = KeyboardKeysEnum.values();
         ChangeListener changeListener = startKeyListener();
         int keysArrayIndex = 0;
-        float initialY = 0;
-        while (counter != (keysHeight) * 4) {
+        while (counter < 4) {
             for (int i = 0; i < 10; i++) {
-                ImageButton tempImageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(keysArray[keysArrayIndex].getImagePath()))));
+                //ImageButton tempImageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(keysArray[keysArrayIndex].getImagePath()))));
+                ImageButton tempImageButton = new ImageButton(new TextureRegionDrawable(new TextureRegion(new Texture(EXPERIMENTAL_KEY))));
                 tempImageButton.setName(keysArray[keysArrayIndex].getText());
-                //tempImageButton.setPosition(keysWidht * i, initialY + counter);
-                tempImageButton.setBounds(keysWidht * i, initialY + counter, keysWidht, keysHeight);
+                tempImageButton.setBounds(keysWidht * i, keysHeight * counter, keysWidht, keysHeight);
                 tempImageButton.getImage().setFillParent(true);
                 stage.addActor(tempImageButton);
                 tempImageButton.addListener(changeListener);
                 keysArrayIndex++;
+                Gdx.app.log(String.valueOf(tempImageButton.getWidth()) + " " + String.valueOf(tempImageButton.getHeight()) + "Position", String.valueOf(tempImageButton.getX()) + " " + String.valueOf(tempImageButton.getY()));
             }
-            counter += keysHeight;
+            counter++;
         }
     }
 
-    private void createTextField(float counter){
+    private void createTextField(float counter) {
         spriteBatch.begin();
         bitmapFont.draw(spriteBatch, guessString, 0, counter + keysHeight);
         spriteBatch.end();
     }
 
-    private ChangeListener startKeyListener(){
-      return new ChangeListener() {
+    private ChangeListener startKeyListener() {
+        return new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (!actor.getName().equals(SUBMIT)){
-                    guessString = actor.getName().equals(DELETE) ? guessString.equals("") ? "" : guessString.substring(0, guessString.length() -1)
+                if (!actor.getName().equals(SUBMIT)) {
+                    guessString = actor.getName().equals(DELETE) ? guessString.equals("") ? "" : guessString.substring(0, guessString.length() - 1)
                             : guessString.concat(actor.getName());
-                }
-                else {
-                    if (guessString.equals(guessObject.getSolution())){
+                } else {
+                    if (guessString.equals(guessObject.getSolution())) {
                         return;
                     }
                 }

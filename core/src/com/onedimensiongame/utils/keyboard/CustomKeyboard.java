@@ -94,7 +94,7 @@ public class CustomKeyboard {
 
     private void createTextField(float counter) {
         spriteBatch.begin();
-        bitmapFont.draw(spriteBatch, guessString, 0, counter + keysHeight);
+        bitmapFont.draw(spriteBatch, guessString, 0, (counter + 2) * keysHeight);
         spriteBatch.end();
     }
 

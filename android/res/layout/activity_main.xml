@@ -22,7 +22,7 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -50,6 +50,15 @@
             android:layout_weight="1"
             android:onClick="handleResumeButton"
             android:text="@string/resume" />
+
+        <Button
+            android:id="@+id/buttonCredits"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:onClick="handleCreditsButton"
+            android:text="@string/credits" />
 
         <Button
             android:id="@+id/buttonExit"

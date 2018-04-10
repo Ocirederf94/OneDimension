@@ -57,7 +57,9 @@ public class MainView {
         customKeyboard.renderKeyboard();
         retryButton.renderButton();
         submitButton.renderButton();
-        levelFactory.renderLevelFeedBack(submitButton);
+
+        //TODO Maybe change for a music
+        //  levelFactory.renderLevelFeedBack(submitButton);
 
     }
 

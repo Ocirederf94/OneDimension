@@ -25,6 +25,8 @@ public class MainActivity extends Activity {
     private SaveStateService saveStateService;
     private Context context;
     private MediaPlayer mainMenuMusic;
+    private MediaPlayer gameMusic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +85,12 @@ public class MainActivity extends Activity {
         this.startActivity(intent);
     }
 
+    public void handleCreditsButton(View view) {
+        Intent intent = new Intent(this, CreditsActivity.class);
+        intent.setAction(Intent.ACTION_VIEW);
+        this.startActivity(intent);
+    }
+
     private void setResumeButton() {
         resumeButton.setEnabled(dataContainer.get(CURRENT_LEVEL) > 0);
     }
@@ -105,6 +113,22 @@ public class MainActivity extends Activity {
         }
         return null;
     }
+
+    private MediaPlayer setUpGameMusic() {
+
+        try {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            AssetFileDescriptor fileDescriptor = getAssets().openFd("audio/main_menu_music.mp3");
+            mediaPlayer.setDataSource(fileDescriptor.getFileDescriptor(), fileDescriptor.getStartOffset(), fileDescriptor.getLength());
+            mediaPlayer.prepare();
+            mediaPlayer.setLooping(true);
+            return mediaPlayer;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public static class AndroidLauncher extends AndroidApplication {
         @Override
